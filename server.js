@@ -1,4 +1,6 @@
 //Here we deal with database configs,env variables,error handling stuff, etc..
+const mongoose = require('mongoose');
+const dotenv = require('dotenv'); //For environment variables
 
 //Error handler: deals with error like printing undefined variables
 //should be on top
@@ -9,10 +11,7 @@ process.on('uncaughtException', err => {
   process.exit(1);
 });
 
-const dotenv = require('dotenv'); //For environment variables
-
 dotenv.config({ path: './configure.env' });
-const mongoose = require('mongoose');
 const app = require('./app.js');
 
 const DB = process.env.DATABASE.replace(
@@ -30,18 +29,7 @@ mongoose
   .then(() => {
     console.log('DB Connected');
   });
-console.log(process.env.NODE_ENV);
-// const testTour = new Tour({
-//   name: 'Dahabbb',
-//   rating: 5,
-// });
 
-// testTourconst port = 3000;
-//   .save()
-//   .then((doc) => {
-//     console.log(doc);
-//   })
-//   .catch((err) => console.log('error', err));
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`app running on port ${port}`);
