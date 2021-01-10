@@ -61,7 +61,17 @@ const staffSchema = mongoose.Schema({
     type: Boolean,
     select: false,
     default: true
+  },
+  deviceManaged: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Device'
   }
+});
+
+staffSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'deviceManaged'
+  });
 });
 
 staffSchema.pre('save', async function(next) {

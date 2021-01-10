@@ -58,13 +58,13 @@ const patientSchema = mongoose.Schema({
   }
 });
 
-patientSchema.virtual('complains', {
-  ref: 'Complain',
+patientSchema.virtual('scans', {
+  ref: 'Scan',
   foreignField: 'patient',
   localField: '_id'
 });
-patientSchema.virtual('complains', {
-  ref: 'Complain',
+patientSchema.virtual('appointments', {
+  ref: 'Appointment',
   foreignField: 'patient',
   localField: '_id'
 });
