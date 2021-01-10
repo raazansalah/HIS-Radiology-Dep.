@@ -3,7 +3,7 @@ const validator = require('validator');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
-const staffSchema = mongoose.Schema({
+const staffSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'You must enter your name']
@@ -11,6 +11,8 @@ const staffSchema = mongoose.Schema({
   ssn: {
     type: Number,
     unique: true,
+    minlength: [14, 'Not valid'],
+    maxlength: [14, 'Not valid'],
     required: [true, 'You must enter your SSN']
   },
   email: {
@@ -47,13 +49,19 @@ const staffSchema = mongoose.Schema({
     type: Date
   },
   hoursWorked: {
-    type: Number
+    type: Number,
+    default: 0
   },
   phoneNumber: {
     type: Number
   },
   address: {
     type: String
+  },
+  role: {
+    type: String,
+    enum: ['doctor', 'technician', 'admin'],
+    required: [true, 'You must specify your role']
   },
   passwordResetToken: { type: String },
   passwordResetExpire: { type: Date },

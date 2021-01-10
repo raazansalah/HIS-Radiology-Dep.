@@ -35,15 +35,7 @@ const createSendToken = (user, status, res) => {
 
 exports.signup = catchAsync(async (req, res, next) => {
   //const newPatient = await Patient.create(req.body); //Anyone can specify his/her role as admin. So, we should specify the data saved
-  const newPatient = await Patient.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
-    photo: req.body.photo,
-    role: req.body.role
-    //passwordChangedAt: req.body.passwordChangedAt
-  });
+  const newPatient = await Patient.create(req.body);
   //Now we can specify admins in the database ourselves
 
   //To make him login instantly, we'll send him a token

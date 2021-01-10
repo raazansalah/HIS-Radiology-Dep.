@@ -1,30 +1,29 @@
-const app = require('../app');
-const appError = require('./../utils/appError');
+const AppError = require('./../utils/appError');
 
-const handleCastErr = (err) => {
-  return new appError(`Invalid ${err.path}: ${err.value}`, 400);
+const handleCastErr = err => {
+  return new AppError(`Invalid ${err.path}: ${err.value}`, 400);
 };
 
 const handleMongoErr = () => {
-  return new appError('An already created tour has the same name', 400);
+  return new AppError('An already created tour has the same name', 400);
 };
 
-const handleValErr = (err) => {
-  const errors = Object.values(err.errors).map((el) => el.message);
+const handleValErr = err => {
+  const errors = Object.values(err.errors).map(el => el.message);
 
-  return new appError(errors.join('. '), 400);
+  return new AppError(errors.join('. '), 400);
 };
 
-const handleJsonWebTokenError = () => new appError('Invalid token', 401);
+const handleJsonWebTokenError = () => new AppError('Invalid token', 401);
 
-const handleTokenExpiredError = () => new appError('Token Expired', 401);
+const handleTokenExpiredError = () => new AppError('Token Expired', 401);
 
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
     error: err,
     message: err.message,
-    stack: err.stack,
+    stack: err.stack
   });
 };
 
@@ -33,14 +32,14 @@ const sendErrorProd = (err, res) => {
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
-      message: err.message,
+      message: err.message
     });
   } else {
-    console.error('Error', err);
+    //console.error('Error', err);
 
     res.status(500).json({
       status: 'error',
-      message: 'Something went wrong',
+      message: 'Something went wrong'
     });
   }
 };

@@ -3,7 +3,7 @@ const validator = require('validator');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
-const patientSchema = mongoose.Schema({
+const patientSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'You must enter your name']
@@ -11,6 +11,8 @@ const patientSchema = mongoose.Schema({
   ssn: {
     type: Number,
     unique: true,
+    minlength: [14, 'Not valid'],
+    maxlength: [14, 'Not valid'],
     required: [true, 'You must enter your SSN']
   },
   email: {
@@ -35,9 +37,9 @@ const patientSchema = mongoose.Schema({
       message: "Passwords don't match"
     }
   },
-  passwordCreatedAt: {
-    type: String,
-    default: Date.now
+  passwordChangedAt: {
+    type: Date,
+    default: Date.now()
   },
   sex: {
     type: String,
@@ -48,6 +50,10 @@ const patientSchema = mongoose.Schema({
   },
   phoneNumber: {
     type: Number
+  },
+  role: {
+    type: String,
+    default: 'user'
   },
   passwordResetToken: { type: String },
   passwordResetExpire: { type: Date },
@@ -119,6 +125,6 @@ patientSchema.methods.createResetToken = function() {
   return resetToken;
 };
 
-const Patient = mongoose.model('Complain', patientSchema);
+const Patient = mongoose.model('Patient', patientSchema);
 
 module.exports = Patient;
