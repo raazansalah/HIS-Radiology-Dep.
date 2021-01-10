@@ -1,0 +1,35 @@
+<%= doctor.D_name %>Doctors's id 
+<%= doctor.D_id %> Doctor's Id
+<%= doctor.D_sex %> Doctor's sex
+<%= doctor.D_bdate %>Doctor's birthdate
+<%= doctor.D_add %>Doctor's add
+<%= doctor.D_hours %>Doctor's hours worked
+<%= doctor.D_phone %>Doctor's phone
+<%= doctor.D_email %>Doctor's email 
+
+<%= Patient.p_name %>patient's name 
+<%= Patient.p_id %> patient's id 
+<%= Patient.p_sex %>patient's sex
+<%= Patient.p_bdate %>patient's birthdate 
+<%= Patient.p_sdate %>patient's id 
+<%= Patient.p_phone %>patient's phone
+<%= Patient.p_medst %>patient's id 
+<%= Patient.p_email %>patient's email
+<%= Patient.p_scans %>patient's static files
+
+<%= device.name %> Device's name 
+<%= device.model %> Device's model 
+<%= device.sdate %> Device service date
+<%= device.subSec %> Device's sub section 
+<%= device.adate %>Device's model
+<%= device.techId %> tech responsible for the device
+
+<%= technichian.T_name %> Tech name 
+<%= technichian.T_ssn %>Tech Birthdate
+<%= technichian.T_id %>Tech Birthdate
+<%= technichian.T_sex %>Tech Birthdate
+<%= technichian.T_bdate %> Tech Birthdate
+<%= technichian.T_add %> Tech address
+<%= technichian.T_hours %> Tech hours worked
+<%= technichian.T_phone %> Tech phone
+<%= technichian.T_email %> Tech emial
