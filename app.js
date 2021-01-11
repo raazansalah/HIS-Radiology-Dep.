@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const path = require('path');
 const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use(hpp());
 app.use(express.static(`${__dirname}/public`));
 
 //Resources routes
+app.use('/', viewRouter);
 //Middleware functions, parameters are(where to use it (parent api) ,what to use)
 
 //As we reached this point of the app, the request couldnt find its router aka ERROR
