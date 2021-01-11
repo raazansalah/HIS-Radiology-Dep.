@@ -39,6 +39,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 //When posting json body, it converts it to JavaScript object (Body parser)
 //the limit is a security option to limit data passed to body
 app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 //Data sanitization against NoSQL query injection
 //for example: adding this {"$gt":""} to email, always returns true

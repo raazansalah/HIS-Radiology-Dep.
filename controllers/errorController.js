@@ -19,12 +19,8 @@ const handleJsonWebTokenError = () => new AppError('Invalid token', 401);
 const handleTokenExpiredError = () => new AppError('Token Expired', 401);
 
 const sendErrorDev = (err, res) => {
-  res.status(err.statusCode).json({
-    status: err.status,
-    error: err,
-    message: err.message,
-    stack: err.stack
-  });
+  console.log(err);
+  res.status(err.statusCode).render('Error');
 };
 
 const sendErrorProd = (err, res) => {
