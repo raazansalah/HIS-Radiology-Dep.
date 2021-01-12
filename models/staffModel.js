@@ -82,6 +82,15 @@ const staffSchema = new mongoose.Schema(
   }
 );
 
+<<<<<<< HEAD
+staffSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'deviceManaged'
+  });
+});
+
+=======
+>>>>>>> e478cfecc1e79c232bab8617643f47e7e6d1baf1
 staffSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next(); //So that we don't change it every time the staff updates his profile
 

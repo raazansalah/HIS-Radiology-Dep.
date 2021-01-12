@@ -42,8 +42,13 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 
 exports.getDevices = catchAsync(async (req, res, next) => {
   // 1) Get tour data from collection
+<<<<<<< HEAD
+  const devices = await Device.find();
+  console.log(devices);
+=======
   const devices = await Device.find().populate('staffs');
   //console.log(devices);
+>>>>>>> e478cfecc1e79c232bab8617643f47e7e6d1baf1
   // 2) Build template
   // 3) Render that template using tour data from 1)
   res.status(200).render('viewDevices', {

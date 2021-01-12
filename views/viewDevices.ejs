@@ -64,7 +64,8 @@
 									<th class="column3">Service Date</th>
 									<th class="column4">Sub Section</th>
 									<th class="column5">Arrival Date</th>
-									<th class="column6">Tech ID</th>
+									<th class="column6">Doctor ID</th>
+									<th class="column7">Tech ID</th>
 								</tr>
 						    </thead>
 						    <tbody>
@@ -75,7 +76,12 @@
 									<td class="column3"><%= device.serviceDate %></td>
 									<td class="column4"><%= device.subSection %></td>
 									<td class="column5"><%= device.arrivalDate %></td>
+<<<<<<< HEAD
+									<td class="column6"><%= device.doctorId %></td>
+									<td class="column7"><%= device.techId %></td>
+=======
 									<td class="column6"><%= device.staffs[devices.length-1]._id %></td>
+>>>>>>> 704391adfe2808e4f5c30b6d81616b93ec6d0155
 								</tr>
 							<% }) %>
 							<div class="button_cont"> <button class="example_b" onclick="btnClicked()" target="_blank" rel="nofollow noopener">Add</button>
