@@ -4,6 +4,11 @@ const viewsController = require('../controllers/viewsController');
 
 const router = express.Router();
 
+router.get(['/', '/home'], viewsController.getHome);
+router.get('/dashboard', viewsController.getDashboard);
+router
+  .get('/contactus', viewsController.getContactForm)
+  .post('/contactus', viewsController.postContactForm);
 router.get('/devices', viewsController.getDevices);
 router.get('/patients', viewsController.getAllPatients);
 router.get('/doctors', viewsController.getAllDoctors);

@@ -1,8 +1,43 @@
+let mongoose = require('mongoose');
 const Device = require('../models/deviceModel');
 const Staff = require('../models/staffModel');
 const Patient = require('../models/patientModel');
+const Complain = require('../models/complainModel');
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/apifeatures');
+
+exports.getHome = catchAsync(async (req, res, next) => {
+  res.status(200).render('home');
+});
+
+exports.getDashboard = catchAsync(async (req, res, next) => {
+  const devices = await Device.find();
+  const patients = await Patient.find();
+  const doctors = await Staff.find({ role: 'doctor' });
+  const techs = await Device.find({ role: 'technician' });
+
+  res.status(200).render('dashboard', {
+    devices: devices.length,
+    doctors: doctors.length,
+    techs: techs.length,
+    patients: patients.length
+  });
+});
+
+exports.getContactForm = catchAsync(async (req, res, next) => {
+  res.status(200).render('contact', { qs: req.body });
+});
+
+exports.postContactForm = catchAsync(async (req, res, next) => {
+  const userID = await Patient.find({ email: req.body.email }).select('_id');
+  const ID = mongoose.Types.ObjectId(userID._id);
+  await Complain.create({
+    patient: ID,
+    complain: req.body.message,
+    visitDate: req.body.date
+  }); //.create returns a promise
+  res.status(200).render('contact', { qs: req.body });
+});
 
 exports.getDevices = catchAsync(async (req, res, next) => {
   // 1) Get tour data from collection
