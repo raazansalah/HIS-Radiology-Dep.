@@ -14,6 +14,7 @@ router.get('/patients', viewsController.getAllPatients);
 router.get('/doctors', viewsController.getAllDoctors);
 router.get('/techs', viewsController.getAllTechnicians);
 
+// router.get('/signup', viewsController.signup);
 router.post('/signup', authController.signup);
 router.post('/addDevice', viewsController.addDevice);
 
