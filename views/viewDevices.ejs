@@ -75,7 +75,7 @@
 									<td class="column3"><%= device.serviceDate %></td>
 									<td class="column4"><%= device.subSection %></td>
 									<td class="column5"><%= device.arrivalDate %></td>
-									<td class="column6"><%= device.techId %></td>
+									<td class="column6"><%= device.staffs[devices.length-1]._id %></td>
 								</tr>
 							<% }) %>
 							<div class="button_cont"> <button class="example_b" onclick="btnClicked()" target="_blank" rel="nofollow noopener">Add</button>
