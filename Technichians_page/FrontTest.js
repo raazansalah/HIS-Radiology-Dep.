@@ -8,9 +8,10 @@ app.use(express.static(`${__dirname}/public`));
 const server = app.listen(3000);
 app.use('/',(req,res)=>{
     res.status(200).render('index',{
-         doctors: [{D_name:'mohamed',D_ssn:123,D_id:1,D_sex:'m',D_bdate:'12/1/1989',D_add:'cairo',D_hours:'8hrs',
-        D_phone:'010245488',D_email:'sjhbdhedue@djd',D_device:"jashj"}
-         ]
+         Technichians: [{T_name:'mohamed',T_ssn:123,T_id:1,T_sex:'m',T_bdate:'12/1/1989',T_add:'cairo',T_hours:'8hrs',
+        T_phone:'010245488',T_email:'sjhbdhedue@djd',T_device:"dijhd"}
+         ],
+         devices:[{name:"djff",model:"guuh",service:"1/52/5",sec:"dhddh",arrival:"58/858/4"}]
         //ADD data to test
     });
 });
