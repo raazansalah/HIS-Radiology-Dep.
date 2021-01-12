@@ -15,7 +15,7 @@ exports.getDashboard = catchAsync(async (req, res, next) => {
   const devices = await Device.find();
   const patients = await Patient.find();
   const doctors = await Staff.find({ role: 'doctor' });
-  const techs = await Device.find({ role: 'technician' });
+  const techs = await Staff.find({ role: 'technician' });
 
   res.status(200).render('dashboard', {
     devices: devices.length,
@@ -42,8 +42,13 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 
 exports.getDevices = catchAsync(async (req, res, next) => {
   // 1) Get tour data from collection
+<<<<<<< HEAD
   const devices = await Device.find();
   console.log(devices);
+=======
+  const devices = await Device.find().populate('staffs');
+  //console.log(devices);
+>>>>>>> e478cfecc1e79c232bab8617643f47e7e6d1baf1
   // 2) Build template
   // 3) Render that template using tour data from 1)
   res.status(200).render('viewDevices', {
@@ -115,5 +120,14 @@ exports.getAllTechnicians = catchAsync(async (req, res) => {
     technicians: technician
   });
 });
+
+// exports.signup = (req, res) => {
+//   //console.log(req.body);
+//   res.status(200).render('signup', { qs: req.body });
+// };
+// app.post('/signup', (req, res, next) => {
+//   console.log(req.body);
+//   res.status(200).render('index', { qs: req.body });
+// });
 
 exports.addDevice = factory.createOne(Device);
