@@ -9,6 +9,9 @@ router.get('/dashboard', viewsController.getDashboard);
 router
   .get('/contactus', viewsController.getContactForm)
   .post('/contactus', viewsController.postContactForm);
+router
+  .get('/appointments', viewsController.renderAppointment)
+  .post('/appointments', viewsController.postAppointment);
 router.get('/devices', viewsController.getDevices);
 router.get('/patients', viewsController.getAllPatients);
 router.get('/doctors', viewsController.getAllDoctors);
