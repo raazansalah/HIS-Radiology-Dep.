@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title> Devices </title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/spreadsheet-512.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>	
+	<div class="limiter">
+		<div class="container-table100">
+			<header class="header-area header-sticky">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<nav class="main-nav">
+								<!-- ***** Logo Start ***** -->
+								<a href="#" class="logo">
+									<img src="images/logo-3.png" alt="Rad"/>
+								</a>
+								<!-- ***** Logo End ***** -->
+								<!-- ***** Menu Start ***** -->
+								<ul class="nav">
+									<li><a href="views/home.ejs" >Home</a></li>
+									<li><a href="views/contactUs.ejs">Signup</a></li>
+									<li><a href="views/contactUs.ejs">Login</a></li>
+									<li><a href="views/viewPatient.ejs">Patient</a></li>
+									<li><a href="views/viewDoc.ejs">Doctor</a></li>
+									<li><a href="views/viewTech.ejs">Technician</a></li>
+									<li><a href="views/viewDevices.ejs" >Device</a></li>
+									<li><a href="views/dashboard.ejs">Dashboard</a></li>
+									<li><a href="views/contactUs.ejs" class="active">Complains</a></li>
+									
+								</ul>
+								<a class='menu-trigger'>
+									<span>Menu</span>
+								</a>
+								<!-- ***** Menu End ***** -->
+							</nav>
+						</div>
+					</div>
+				</div>
+			</header> 
+			<div class="wrap-table100">
+				<div class="table100">
+					<% if (mess.length > 0) { %>	
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Name</th>
+									<th class="column2">Mail</th>
+									<th class="column3">Date</th>
+									<th class="column4">Message</th>
+									
+
+								</tr>
+						    </thead>
+						    <tbody>
+							<% mess.forEach(mes => { %>
+								<tr>
+									<td class="column1"><%= mes.name %></td>
+									<td class="column2"><%= mes.mail %></td>
+									<td class="column3"><%= mes.date %></td>
+									<td class="column4"><%= mes.message %></td>
+									
+								</tr>
+							<% }) %>
+							<div class="button_con"> 
+								<button class="example_b" onclick="btnClicked1()" target="_blank" rel="nofollow noopener">Delete</button>
+								
+							</div>
+						    
+					<% } else { %>
+							<p class="noDoc" > There is no complains to show</p>
+							
+					<%  } %>
+						</tbody>
+					</table>
+					
+						
+					
+				</div>
+			</div>
+		</div>
+	</div>
+    <script>
+		
+		function btnClicked1(){
+			document.location.href="https://www.google.com/";
+		}
+		
+	</script>
+
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>
