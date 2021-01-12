@@ -3,78 +3,84 @@ const validator = require('validator');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
-const staffSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'You must enter your name']
-  },
-  ssn: {
-    type: Number,
-    unique: true,
-    minlength: [14, 'Not valid'],
-    maxlength: [14, 'Not valid'],
-    required: [true, 'You must enter your SSN']
-  },
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    required: [true, 'You must enter an email'],
-    validate: [validator.isEmail, 'Not a valid email']
-  },
-  password: {
-    type: String,
-    minLength: [8, 'The password should be 8 characters minimum'],
-    required: [true, 'You must enter a password']
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      validator: function(el) {
-        return el === this.password;
-      },
-      message: "Passwords don't match"
+const staffSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'You must enter your name']
+    },
+    ssn: {
+      type: Number,
+      unique: true,
+      minlength: [14, 'Not valid'],
+      maxlength: [14, 'Not valid'],
+      required: [true, 'You must enter your SSN']
+    },
+    email: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      required: [true, 'You must enter an email'],
+      validate: [validator.isEmail, 'Not a valid email']
+    },
+    password: {
+      type: String,
+      minLength: [8, 'The password should be 8 characters minimum'],
+      required: [true, 'You must enter a password']
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        validator: function(el) {
+          return el === this.password;
+        },
+        message: "Passwords don't match"
+      }
+    },
+    passwordCreatedAt: {
+      type: String,
+      default: Date.now
+    },
+    sex: {
+      type: String,
+      enum: ['Male', 'Female']
+    },
+    birthdate: {
+      type: Date
+    },
+    hoursWorked: {
+      type: Number,
+      default: 0
+    },
+    phoneNumber: {
+      type: Number
+    },
+    address: {
+      type: String
+    },
+    role: {
+      type: String,
+      enum: ['doctor', 'technician', 'admin'],
+      required: [true, 'You must specify your role']
+    },
+    passwordResetToken: { type: String },
+    passwordResetExpire: { type: Date },
+    active: {
+      type: Boolean,
+      select: false,
+      default: true
+    },
+    deviceManaged: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Device'
     }
   },
-  passwordCreatedAt: {
-    type: String,
-    default: Date.now
-  },
-  sex: {
-    type: String,
-    enum: ['Male', 'Female']
-  },
-  birthdate: {
-    type: Date
-  },
-  hoursWorked: {
-    type: Number,
-    default: 0
-  },
-  phoneNumber: {
-    type: Number
-  },
-  address: {
-    type: String
-  },
-  role: {
-    type: String,
-    enum: ['doctor', 'technician', 'admin'],
-    required: [true, 'You must specify your role']
-  },
-  passwordResetToken: { type: String },
-  passwordResetExpire: { type: Date },
-  active: {
-    type: Boolean,
-    select: false,
-    default: true
-  },
-  deviceManaged: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Device'
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
-});
+);
 
 // staffSchema.pre(/^find/, function(next) {
 //   this.populate({
