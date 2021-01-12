@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const { promisify } = require('util');
 const JWT = require('jsonwebtoken');
-//const Staff = require('./../models/staffModel');
+const Staff = require('./../models/staffModel');
 const Patient = require('./../models/patientModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
@@ -35,11 +35,11 @@ const createSendToken = (user, status, res) => {
 
 exports.signup = catchAsync(async (req, res, next) => {
   //const newPatient = await Patient.create(req.body); //Anyone can specify his/her role as admin. So, we should specify the data saved
-  const newPatient = await Patient.create(req.body);
+  // const newPatient = await Patient.create(req.body);
   //Now we can specify admins in the database ourselves
-
+  const newStaff = await Staff.create(req.body);
   //To make him login instantly, we'll send him a token
-  createSendToken(newPatient, 201, res);
+  createSendToken(newStaff, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
