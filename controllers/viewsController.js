@@ -45,7 +45,7 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 
 exports.getDevices = catchAsync(async (req, res, next) => {
   const devices = await Device.find().populate('staffs');
-  //console.log(devices);
+  console.log(devices);
   res.status(200).render('viewDevices', {
     devices
   });
@@ -158,7 +158,8 @@ exports.postAppointment = catchAsync(async (req, res, next) => {
 });
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
-  const doctor = await await Staff.findById(req.user.id);
+  console.log(req.user.id);
+  const doctor = await Staff.findById(req.user.id);
   const device = await Device.findById(doctor.deviceManaged);
   if (!doctor) {
     //If the ID was valid, the output data will be null
