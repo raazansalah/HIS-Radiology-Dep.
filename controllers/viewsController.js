@@ -1,4 +1,5 @@
 //const mongoose = require('mongoose');
+const multer = require('multer');
 const JWT = require('jsonwebtoken');
 const { promisify } = require('util');
 const AppError = require('./../utils/appError');
@@ -156,15 +157,13 @@ exports.postAppointment = catchAsync(async (req, res, next) => {
   res.status(200).render('viewAppointments', { qs: req.body });
 });
 
-// exports.signup = (req, res) => {
-//   //console.log(req.body);
-//   res.status(200).render('signup', { qs: req.body });
-// };
-// app.post('/signup', (req, res, next) => {
-//   console.log(req.body);
-//   res.status(200).render('index', { qs: req.body });
-// });
+exports.renderTechProfile = catchAsync(async (req, res, next) => {
+  res
+    .status(200)
+    .render('profileTech', { Technicians: req.body, devices: req.body });
+});
 
+//=================================================================AUTH
 const signInToken = id => {
   return JWT.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES
@@ -232,5 +231,32 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+//=================================================================AUTH
+
+// ======================================UPLOADS
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads');
+  },
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split('/')[1];
+    cb(null, `patient-${req.user.id}-${Date.now()}.${ext}`);
+  }
+});
+
+// const multerFilter = (req, file, cb) => {
+//   if (file.mimetype.startsWith('image')) {
+//     cb(null, true);
+//   } else {
+//     cb(new AppError('Not an image! Please upload only images.', 400), false);
+//   }
+// };
+
+const upload = multer({
+  storage: multerStorage
+});
+
+exports.uploadFile = upload.single('file');
+// ======================================UPLOADS
 
 exports.addDevice = factory.createOne(Device);

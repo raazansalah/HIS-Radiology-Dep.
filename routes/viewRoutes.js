@@ -17,8 +17,9 @@ router.get('/devices', viewsController.getDevices);
 router.get('/patients', viewsController.getAllPatients);
 router.get('/doctors', viewsController.getAllDoctors);
 router.get('/techs', viewsController.getAllTechnicians);
+router.get('/myTech', viewsController.renderTechProfile);
 
-// router.get('/signup', viewsController.signup);
+router.post('/uploads', viewsController.uploadFile);
 router
   .get('/signup', viewsController.getSignUp)
   .post('/signup', viewsController.postSignUp);
