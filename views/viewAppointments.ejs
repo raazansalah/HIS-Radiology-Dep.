@@ -57,12 +57,12 @@
 
 			<div class="wrap-contact100">
 				<div class="contact100-pic js-tilt" data-tilt>
-					<img src="/contact/images/img004.png" alt="IMG">
+					<img src="/appointments/images/img004.png" alt="IMG">
 				</div>
 
-				<form class="contact100-form validate-form" method="POST" action="/contactus">
+				<form class="contact100-form validate-form" method="POST" action="/appointments/">
 					<span class="contact100-form-title">
-						Contact Us 
+						Book an Appointment
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Name is required">
@@ -97,15 +97,12 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Message is required">
-						<select class="input100"  name="scantype" id="scantype" placeholder="ScanType">
-							
-							<% var options = [ "MRI", "X-Ray", "CT", "Ultrasound", "Mamograohy"]; %>
-							<%for ( var i = 0; i < options.length; i++ )%>
-							{
-								<% var selected = ( config[0].volume == i ) ? "selected" : ""; %> 
-								<option value="<%=options[ i ] %>" <%=selected %> > <%=i %> </option>
-						    <%}%>
+					<div class="wrap-input100 validate-input" data-validate = "Scantype is required">
+						<select class="container-contact100-form-btn contact100-form-btn1"  name="scantype" id="scantype" >
+							<% var options = ["MRI", "X-Ray", "CT", "Ultrasound", "Mamograohy"]; %>
+							<% for(var i = 0; i < 5; i++) { %>
+								<option value='<%= options[i] %>'><%= options[i] %></option>
+							<% } %>
 						</select>
 						<span class="focus-input100"></span>
 					</div>

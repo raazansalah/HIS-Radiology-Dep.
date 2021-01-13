@@ -122,7 +122,14 @@ exports.renderAppointment = catchAsync(async (req, res, next) => {
 });
 
 exports.postAppointment = catchAsync(async (req, res, next) => {
-  const appointment = await Appointment.create(req.body);
+  console.log(req.body);
+  const appointment = await Appointment.create({
+    patientName: req.body.name,
+    patientMail: req.body.email,
+    addmissionDate: req.body.dvisit,
+    addmissionTime: req.body.tvisit,
+    scanType: req.body.scantype
+  });
   res.status(200).render('viewAppointments', { qs: req.body });
 });
 
