@@ -182,7 +182,10 @@ const createSendToken = (user, status, res) => {
 
   res.cookie('jwt', token, { httpOnly: true });
   user.password = undefined;
-  res.redirect('/home');
+  if (user.role === 'Doctor') res.redirect('/getDoctor');
+  if (user.role === 'Patient') res.redirect('/getPatient');
+  if (user.role === 'Technician') res.redirect('/getTech');
+  if (user.role === 'Admin') res.redirect('/dashboard');
 };
 
 exports.getSignUp = catchAsync(async (req, res, next) => {
