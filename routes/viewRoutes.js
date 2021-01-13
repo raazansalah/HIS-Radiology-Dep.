@@ -17,9 +17,8 @@ router.get('/devices', viewsController.getDevices);
 router.get('/patients', viewsController.getAllPatients);
 router.get('/doctors', viewsController.getAllDoctors);
 router.get('/techs', viewsController.getAllTechnicians);
-router.get('/getTech', viewsController.getTech);
 
-router.post('/uploads', viewsController.uploadFile);
+router.post('/upload', viewsController.uploadFile);
 router
   .get('/signup', viewsController.getSignUp)
   .post('/signup', viewsController.postSignUp);
@@ -35,13 +34,13 @@ router.get(
 
 router.get(
   '/getTech',
-  viewsController.restrictTo('Patient'),
-  viewsController.getPatient
+  viewsController.restrictTo('Technician'),
+  viewsController.getTech
 );
 router.get(
   '/getPatient',
-  viewsController.restrictTo('Technician'),
-  viewsController.getTech
+  viewsController.restrictTo('Patient'),
+  viewsController.getPatient
 );
 
 module.exports = router;

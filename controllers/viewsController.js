@@ -44,7 +44,7 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 });
 
 exports.getDevices = catchAsync(async (req, res, next) => {
-  const devices = await Device.find();
+  const devices = await Device.find().populate('staffs');
   //console.log(devices);
   res.status(200).render('viewDevices', {
     devices
@@ -158,15 +158,29 @@ exports.postAppointment = catchAsync(async (req, res, next) => {
 });
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
-  const doctor = await Staff.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
-
+  const doctor = await await Staff.findById(req.user.id);
+  const device = await Device.findById(doctor.deviceManaged);
   if (!doctor) {
     //If the ID was valid, the output data will be null
     return next(new AppError('No document found with that ID', 404));
   }
 
-  res.status(200).render('profileDoc', {
-    doctor
+  res.status(200).render('profileDoc2', {
+    doctors: doctor,
+    devices: device
+  });
+});
+
+exports.getPatient = catchAsync(async (req, res, next) => {
+  const patient = await Patient.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
+
+  if (!patient) {
+    //If the ID was valid, the output data will be null
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  res.status(200).render('profilePatient', {
+    patient
   });
 });
 
@@ -208,7 +222,7 @@ exports.getSignUp = catchAsync(async (req, res, next) => {
 
 exports.postSignUp = catchAsync(async (req, res, next) => {
   let newUser;
-  //console.log(req.body);
+  console.log(req.body);
   if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
   else newUser = await Staff.create(req.body);
   //To make him login instantly, we'll send him a token
@@ -276,31 +290,5 @@ const upload = multer({
 
 exports.uploadFile = upload.single('file');
 // ======================================UPLOADS
-
-exports.getDoctor = catchAsync(async (req, res, next) => {
-  const doctor = await Staff.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
-
-  if (!doctor) {
-    //If the ID was valid, the output data will be null
-    return next(new AppError('No document found with that ID', 404));
-  }
-
-  res.status(200).render('profileDoc', {
-    doctor
-  });
-});
-
-exports.getPatient = catchAsync(async (req, res, next) => {
-  const patient = await Patient.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
-
-  if (!patient) {
-    //If the ID was valid, the output data will be null
-    return next(new AppError('No document found with that ID', 404));
-  }
-
-  res.status(200).render('profilePatient', {
-    patient
-  });
-});
 
 exports.addDevice = factory.createOne(Device);
