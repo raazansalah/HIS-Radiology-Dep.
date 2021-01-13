@@ -196,7 +196,10 @@ const createSendToken = (user, status, res) => {
 
   res.cookie('jwt', token, { httpOnly: true });
   user.password = undefined;
-  res.redirect('/home');
+  if (user.role === 'Doctor') res.redirect('/getDoctor');
+  if (user.role === 'Patient') res.redirect('/getPatient');
+  if (user.role === 'Technician') res.redirect('/getTech');
+  if (user.role === 'Admin') res.redirect('/dashboard');
 };
 
 exports.getSignUp = catchAsync(async (req, res, next) => {
@@ -273,5 +276,31 @@ const upload = multer({
 
 exports.uploadFile = upload.single('file');
 // ======================================UPLOADS
+
+exports.getDoctor = catchAsync(async (req, res, next) => {
+  const doctor = await Staff.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
+
+  if (!doctor) {
+    //If the ID was valid, the output data will be null
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  res.status(200).render('profileDoc', {
+    doctor
+  });
+});
+
+exports.getPatient = catchAsync(async (req, res, next) => {
+  const patient = await Patient.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
+
+  if (!patient) {
+    //If the ID was valid, the output data will be null
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  res.status(200).render('profilePatient', {
+    patient
+  });
+});
 
 exports.addDevice = factory.createOne(Device);

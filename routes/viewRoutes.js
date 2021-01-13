@@ -33,4 +33,15 @@ router.get(
   viewsController.getDoctor
 );
 
+router.get(
+  '/getTech',
+  viewsController.restrictTo('Patient'),
+  viewsController.getPatient
+);
+router.get(
+  '/getPatient',
+  viewsController.restrictTo('Technician'),
+  viewsController.getTech
+);
+
 module.exports = router;
