@@ -26,6 +26,11 @@ router
 router.post('/addDevice', viewsController.addDevice);
 
 router.use(viewsController.protect);
-router.use(viewsController.restrictTo('admin'));
+
+router.get(
+  '/getDoctor',
+  viewsController.restrictTo('Doctor'),
+  viewsController.getDoctor
+);
 
 module.exports = router;
