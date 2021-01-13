@@ -5,6 +5,7 @@ const viewsController = require('../controllers/viewsController');
 const router = express.Router();
 
 router.get(['/', '/home'], viewsController.getHome);
+router.get('/complains', viewsController.getAllComplains);
 router.get('/dashboard', viewsController.getDashboard);
 router
   .get('/contactus', viewsController.getContactForm)

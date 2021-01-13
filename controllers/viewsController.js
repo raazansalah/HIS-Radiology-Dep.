@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 const JWT = require('jsonwebtoken');
 const factory = require('./handleController');
 const Device = require('../models/deviceModel');
@@ -32,10 +32,8 @@ exports.getContactForm = catchAsync(async (req, res, next) => {
 });
 
 exports.postContactForm = catchAsync(async (req, res, next) => {
-  const userID = await Patient.find({ email: req.body.email }).select('_id');
-  const ID = mongoose.Types.ObjectId(userID._id);
   await Complain.create({
-    patient: ID,
+    patient: req.body.email,
     complain: req.body.message,
     visitDate: req.body.date
   }); //.create returns a promise
@@ -43,11 +41,8 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 });
 
 exports.getDevices = catchAsync(async (req, res, next) => {
-  // 1) Get tour data from collection
   const devices = await Device.find();
   //console.log(devices);
-  // 2) Build template
-  // 3) Render that template using tour data from 1)
   res.status(200).render('viewDevices', {
     devices
   });
@@ -118,12 +113,37 @@ exports.getAllTechnicians = catchAsync(async (req, res) => {
   });
 });
 
+exports.getAllComplains = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Complain.find(), req.query)
+    //.find({duration: 5, difficulty: 'easy'})
+    //.find().where('duration').equals("5")
+    //find is like SELECT in SQL, returns an array of objects
+    .filter()
+    .sort()
+    .limitFields()
+    .pagination();
+
+  //const docs = await features.query.explain();
+  const complain = await features.query;
+  const user = await Patient.find({ email: complain.patient }).select('name');
+  //console.log(complain, user.name);
+  //SEND RESPONSE
+  res.status(200).render('viewComplains', {
+    complains: complain,
+    name: user.name,
+    email: complain.patient
+  });
+  // res.status(200).json({
+  //   patients: patient
+  // });
+});
+
 exports.renderAppointment = catchAsync(async (req, res, next) => {
   res.status(200).render('viewAppointments', { qs: req.body });
 });
 
 exports.postAppointment = catchAsync(async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   await Appointment.create({
     patientName: req.body.name,
     patientMail: req.body.email,
@@ -169,7 +189,7 @@ exports.getSignUp = catchAsync(async (req, res, next) => {
 
 exports.postSignUp = catchAsync(async (req, res, next) => {
   let newUser;
-  console.log(req.body);
+  //console.log(req.body);
   if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
   else newUser = await Staff.create(req.body);
   //To make him login instantly, we'll send him a token
