@@ -24,4 +24,7 @@ router
   .post('/signup', viewsController.postSignUp);
 router.post('/addDevice', viewsController.addDevice);
 
+router.use(viewsController.protect);
+router.use(viewsController.restrictTo('admin'));
+
 module.exports = router;

@@ -1,5 +1,7 @@
 //const mongoose = require('mongoose');
 const JWT = require('jsonwebtoken');
+const { promisify } = require('util');
+const AppError = require('./../utils/appError');
 const factory = require('./handleController');
 const Device = require('../models/deviceModel');
 const Appointment = require('../models/appointmentModel');
@@ -196,5 +198,39 @@ exports.postSignUp = catchAsync(async (req, res, next) => {
   createSendToken(newUser, 201, res);
   //res.status(200).render('signup', { qs: req.body });
 });
+
+exports.protect = catchAsync(async (req, res, next) => {
+  //Getting the token from the header
+  const { cookies } = req.cookies;
+  let token;
+  if (cookies.jwt) token = cookies.jwt; //Bearer 21324ywdh728y4ufihewe24twtw3
+  if (!token) return next(new AppError('You are not logged in', 401));
+
+  //Verify the token
+  const decoded = await promisify(JWT.verify)(token, process.env.JWT_SECRET);
+
+  //Check if the user still exists
+  let current = await Patient.findById(decoded.id);
+  if (!current) current = await Staff.findById(decoded.id);
+  if (!current) return next(new AppError('Patient doesnt exist anymore', 401));
+
+  //Check that password didn't change
+  if (current.changedPass(decoded.iat))
+    return next(new AppError('Password changed', 401));
+
+  req.user = current;
+  next();
+});
+
+exports.restrictTo = (...roles) => {
+  //we can't add parameters to middleware so we wrapped the function in another
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role))
+      return next(
+        new AppError('You are not allowed to access this route', 403)
+      );
+    next();
+  };
+};
 
 exports.addDevice = factory.createOne(Device);

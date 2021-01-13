@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title> Technichians </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/spreadsheet-512.png"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/techProfile/images/icons/spreadsheet-512.png" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/techProfile/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/techProfile/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/techProfile/vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/techProfile/vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/techProfile/vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/techProfile/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/techProfile/css/main.css">
+	<!--===============================================================================================-->
 </head>
-<body>	
+
+<body>
 	<div class="limiter">
 		<div class="container-table100">
 			<header class="header-area header-sticky">
@@ -31,15 +33,15 @@
 							<nav class="main-nav">
 								<!-- ***** Logo Start ***** -->
 								<a href="#" class="logo">
-									<img src="images/logo-3.png" alt="Rad"/>
+									<img src="/techProfile/images/logo-3.png" alt="Rad" />
 								</a>
 								<!-- ***** Logo End ***** -->
 								<!-- ***** Menu Start ***** -->
 								<ul class="nav">
-									<li><a href="views/home.ejs" >Home</a></li>
-									<li><a href="views/viewPatient.ejs">SignUp</a></li>
-									<li><a href="views/viewDoc.ejs">Login</a></li>
-									
+									<li><a href="/techProfile/views/home.ejs">Home</a></li>
+									<li><a href="/techProfile/views/viewPatient.ejs">SignUp</a></li>
+									<li><a href="/techProfile/views/viewDoc.ejs">Login</a></li>
+
 								</ul>
 								<a class='menu-trigger'>
 									<span>Menu</span>
@@ -49,10 +51,10 @@
 						</div>
 					</div>
 				</div>
-			</header> 
+			</header>
 			<div class="wrap-table100">
 				<div class="table100">
-					<% if (Technichians.length > 0) { %>	
+					<% if (Technichians.length> 0) { %>
 						<table>
 							<thead>
 								<tr class="table100-head">
@@ -65,41 +67,61 @@
 									<th class="column7">HoursWorked</th>
 									<th class="column8">Phone</th>
 									<th class="column9">Email</th>
-									
+
 								</tr>
-						    </thead>
-						    <tbody>
-							<% Technichians.forEach(technichian => { %>
-								<tr>
-									<td class="column1"><%= technichian.T_name %></td>
-									<td class="column2"><%= technichian.T_ssn %></td>
-									<td class="column3"><%= technichian.T_id %></td>
-									<td class="column4"><%= technichian.T_sex %></td>
-									<td class="column5"><%= technichian.T_bdate %></td>
-									<td class="column6"><%= technichian.T_add %></td>
-									<td class="column7"><%= technichian.T_hours %></td>
-									<td class="column8"><%= technichian.T_phone %></td>
-									<td class="column9"><%= technichian.T_email %></td>
-									
-								</tr>
-							<% }) %>
-							<div class="button_cont"> <button class="example_b" onclick="btnClicked()" target="_blank" rel="nofollow noopener">Calender</button>
-								<button class="example_b" onclick="btnClicked1()" target="_blank" rel="nofollow noopener">Upload</button>
-							</div>
-						    
-					
-							
-					<%  } %>
-						</tbody>
-					</table>
-					
-						
-					
+							</thead>
+							<tbody>
+								<% Technichians.forEach(technichian=> { %>
+									<tr>
+										<td class="column1">
+											<%= technichian.T_name %>
+										</td>
+										<td class="column2">
+											<%= technichian.T_ssn %>
+										</td>
+										<td class="column3">
+											<%= technichian.T_id %>
+										</td>
+										<td class="column4">
+											<%= technichian.T_sex %>
+										</td>
+										<td class="column5">
+											<%= technichian.T_bdate %>
+										</td>
+										<td class="column6">
+											<%= technichian.T_add %>
+										</td>
+										<td class="column7">
+											<%= technichian.T_hours %>
+										</td>
+										<td class="column8">
+											<%= technichian.T_phone %>
+										</td>
+										<td class="column9">
+											<%= technichian.T_email %>
+										</td>
+
+									</tr>
+									<% }) %>
+										<div class="button_cont"> <button class="example_b" onclick="btnClicked()"
+												target="_blank" rel="nofollow noopener">Calender</button>
+											<button class="example_b" onclick="btnClicked1()" target="_blank"
+												rel="nofollow noopener">Upload</button>
+										</div>
+
+
+
+										<% } %>
+							</tbody>
+						</table>
+
+
+
 				</div>
 			</div>
 			<div class="wrap-table100">
 				<div class="table100">
-					<% if (devices.length > 0) { %>	
+					<% if (devices.length> 0) { %>
 						<table>
 							<thead>
 								<tr class="table100-head">
@@ -108,58 +130,69 @@
 									<th class="column3">ServiceDate</th>
 									<th class="column4">SubSection</th>
 									<th class="column5">ArrivalDate</th>
-									
-									
-									
+
+
+
 								</tr>
-						    </thead>
-						    <tbody>
-							<% devices.forEach(device => { %>
-								<tr>
-									<td class="column1"><%= device.name %></td>
-									<td class="column2"><%= device.model %></td>
-									<td class="column3"><%= device.service %></td>
-									<td class="column4"><%= device.sec %></td>
-									<td class="column5"><%= device.arrival %></td>
-									
-									
-									
-								</tr>
-							<% }) %>
-							
-						    
-					
-							
-					<%  } %>
-						</tbody>
-					</table>
-					
-						
-					
+							</thead>
+							<tbody>
+								<% devices.forEach(device=> { %>
+									<tr>
+										<td class="column1">
+											<%= device.name %>
+										</td>
+										<td class="column2">
+											<%= device.model %>
+										</td>
+										<td class="column3">
+											<%= device.service %>
+										</td>
+										<td class="column4">
+											<%= device.sec %>
+										</td>
+										<td class="column5">
+											<%= device.arrival %>
+										</td>
+
+
+
+									</tr>
+									<% }) %>
+
+
+
+
+										<% } %>
+							</tbody>
+						</table>
+
+
+
 				</div>
 			</div>
 		</div>
 	</div>
-    <script>
-		function btnClicked(){
-			document.location.href="https://calendar.google.com/";
+	<script>
+		function btnClicked() {
+			document.location.href = "https://calendar.google.com/";
 		}
-		function btnClicked1(){
-			document.location.href="https://www.google.com/";
+		function btnClicked1() {
+			document.location.href = "https://www.google.com/";
 		}
 	</script>
 
-	
 
-<!--===============================================================================================-->	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+
+	<!--===============================================================================================-->
+	<script src="/techProfile/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/techProfile/vendor/bootstrap/js/popper.js"></script>
+	<script src="/techProfile/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/techProfile/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="/techProfile/js/main.js"></script>
 
 </body>
+
 </html>
