@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title> Patients </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="/patients/images/icons/spreadsheet-512.png"/>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/patients/images/icons/spreadsheet-512.png" />
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/patients/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/patients/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/patients/vendor/animate/animate.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/patients/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/patients/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/patients/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/patients/css/main.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 </head>
-<body>	
+
+<body>
 	<div class="limiter">
 		<div class="container-table100">
 			<header class="header-area header-sticky">
@@ -31,15 +33,15 @@
 							<nav class="main-nav">
 								<!-- ***** Logo Start ***** -->
 								<a href="#" class="logo">
-									<img src="/patients/images/logo-3.png" alt="Rad"/>
+									<img src="/patients/images/logo-3.png" alt="Rad" />
 								</a>
 								<!-- ***** Logo End ***** -->
 								<!-- ***** Menu Start ***** -->
 								<ul class="nav">
-									<li><a href="/home" >Home</a></li>
+									<li><a href="/home">Home</a></li>
 									<li><a href="/patients" class="active">Patients</a></li>
 									<li><a href="/doctors">Doctors</a></li>
-									<li><a href="/techs" >Technicians</a></li>
+									<li><a href="/techs">Technicians</a></li>
 									<li><a href="/devices">Devices</a></li>
 									<li><a href="/dashboard">Dashboard</a></li>
 									<li><a href="/contactus">Contact Us</a></li>
@@ -52,10 +54,10 @@
 						</div>
 					</div>
 				</div>
-			</header> 
+			</header>
 			<div class="wrap-table100">
 				<div class="table100">
-					<% if (patients.length > 0) { %>	
+					<% if (patients.length> 0) { %>
 						<table>
 							<thead>
 								<tr class="table100-head">
@@ -64,65 +66,83 @@
 									<th class="column3">ID</th>
 									<th class="column4">Sex</th>
 									<th class="column5">Birthdate</th>
-									
+
 									<th class="column7">Phone</th>
-									
+
 									<th class="column9">Email</th>
 									<!--<th class="column10">Password</th>-->
 									<th class="column10">Scans</th>
 								</tr>
-						    </thead>
-						    <tbody>
-							<% patients.forEach(Patient => { %>
-								<tr>
-									<td class="column1"><%= Patient.name %></td>
-									<td class="column2"><%= Patient.ssn %></td>
-									<td class="column3"><%= Patient._id %></td>
-									<td class="column4"><%= Patient.sex %></td>
-									<td class="column5"><%= Patient.birthdate %></td>
-									
-									<td class="column7"><%= Patient.phoneNumber %></td>
-									
-									<td class="column9"><%= Patient.email %></td>
-								</tr>
-							<% }) %>
-							<div class="button_cont"> <button class="example_b" onclick="btnClicked()" target="_blank" rel="nofollow noopener">Add</button>
-								<button class="example_b" onclick="btnClicked1()" target="_blank" rel="nofollow noopener">Delete</button>
-							</div>
-						    
-					<% } else { %>
-							<p class="noDoc" > There are no technichians to show</p>
-							<div class="button_con"><button class="example_b" onclick="btnClicked()" target="_blank" rel="nofollow noopener">Add</button></div>
-					<%  } %>
-						</tbody>
-					</table>
-					
-						
-					
+							</thead>
+							<tbody>
+								<% patients.forEach(Patient=> { %>
+									<tr>
+										<td class="column1">
+											<%= Patient.name %>
+										</td>
+										<td class="column2">
+											<%= Patient.ssn %>
+										</td>
+										<td class="column3">
+											<%= Patient._id %>
+										</td>
+										<td class="column4">
+											<%= Patient.sex %>
+										</td>
+										<td class="column5">
+											<%= Patient.birthdate %>
+										</td>
+
+										<td class="column7">
+											<%= Patient.phoneNumber %>
+										</td>
+
+										<td class="column9">
+											<%= Patient.email %>
+										</td>
+									</tr>
+									<% }) %>
+										<div class="button_cont"> <button class="example_b" onclick="btnClicked()"
+												target="_blank" rel="nofollow noopener">Add</button>
+											<button class="example_b" onclick="btnClicked1()" target="_blank"
+												rel="nofollow noopener">Delete</button>
+										</div>
+
+										<% } else { %>
+											<p class="noDoc"> There are no patients to show</p>
+											<div class="button_con"><button class="example_b" onclick="btnClicked()"
+													target="_blank" rel="nofollow noopener">Add</button></div>
+											<% } %>
+							</tbody>
+						</table>
+
+
+
 				</div>
 			</div>
 		</div>
 	</div>
-    <script>
-		function btnClicked(){
-			document.location.href="views/addPatient";
+	<script>
+		function btnClicked() {
+			document.location.href = "views/addPatient";
 		}
-		function btnClicked1(){
-			document.location.href="https://www.google.com/";
+		function btnClicked1() {
+			document.location.href = "https://www.google.com/";
 		}
 	</script>
 
-	
 
-<!--===============================================================================================-->	
+
+	<!--===============================================================================================-->
 	<script src="/patients/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/patients/vendor/bootstrap/js/popper.js"></script>
 	<script src="/patients/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/patients/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/patients/js/main.js"></script>
 
 </body>
+
 </html>
