@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const JWT = require('jsonwebtoken');
 const factory = require('./handleController');
 const Device = require('../models/deviceModel');
 const Staff = require('../models/staffModel');
@@ -14,8 +15,8 @@ exports.getHome = catchAsync(async (req, res, next) => {
 exports.getDashboard = catchAsync(async (req, res, next) => {
   const devices = await Device.find();
   const patients = await Patient.find();
-  const doctors = await Staff.find({ role: 'doctor' });
-  const techs = await Staff.find({ role: 'technician' });
+  const doctors = await Staff.find({ role: 'Doctor' });
+  const techs = await Staff.find({ role: 'Technician' });
 
   res.status(200).render('dashboard', {
     devices: devices.length,
@@ -42,13 +43,8 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 
 exports.getDevices = catchAsync(async (req, res, next) => {
   // 1) Get tour data from collection
-<<<<<<< HEAD
   const devices = await Device.find();
-  console.log(devices);
-=======
-  const devices = await Device.find().populate('staffs');
   //console.log(devices);
->>>>>>> e478cfecc1e79c232bab8617643f47e7e6d1baf1
   // 2) Build template
   // 3) Render that template using tour data from 1)
   res.status(200).render('viewDevices', {
@@ -79,7 +75,7 @@ exports.getAllPatients = catchAsync(async (req, res) => {
 });
 
 exports.getAllDoctors = catchAsync(async (req, res) => {
-  const features = new APIFeatures(Staff.find({ role: 'doctor' }), req.query)
+  const features = new APIFeatures(Staff.find({ role: 'Doctor' }), req.query)
     //.find({duration: 5, difficulty: 'easy'})
     //.find().where('duration').equals("5")
     //find is like SELECT in SQL, returns an array of objects
@@ -101,7 +97,7 @@ exports.getAllDoctors = catchAsync(async (req, res) => {
 });
 exports.getAllTechnicians = catchAsync(async (req, res) => {
   const features = new APIFeatures(
-    Staff.find({ role: 'technician' }),
+    Staff.find({ role: 'Technician' }),
     req.query
   )
     //.find({duration: 5, difficulty: 'easy'})
@@ -129,5 +125,39 @@ exports.getAllTechnicians = catchAsync(async (req, res) => {
 //   console.log(req.body);
 //   res.status(200).render('index', { qs: req.body });
 // });
+
+const signInToken = id => {
+  return JWT.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES
+  });
+};
+
+const createSendToken = (user, status, res) => {
+  const token = signInToken(user.id);
+  // const cookieOptions = {
+  //   expires: new Date(
+  //     Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+  //   ),
+  //   httpOnly: true
+  // };
+
+  res.cookie('jwt', token, { httpOnly: true });
+  user.password = undefined;
+  res.redirect('/home');
+};
+
+exports.getSignUp = catchAsync(async (req, res, next) => {
+  res.status(200).render('signup', { qs: req.body });
+});
+
+exports.postSignUp = catchAsync(async (req, res, next) => {
+  let newUser;
+  console.log(req.body);
+  if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
+  else newUser = await Staff.create(req.body);
+  //To make him login instantly, we'll send him a token
+  createSendToken(newUser, 201, res);
+  //res.status(200).render('signup', { qs: req.body });
+});
 
 exports.addDevice = factory.createOne(Device);

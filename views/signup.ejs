@@ -11,12 +11,14 @@
 
     <!-- Title Page-->
     <title>SIGN UP FORM</title>
-    <link rel="icon" type="image/png" href="/signup/images/icons/favicon.ico"/>
+    <link rel="icon" type="image/png" href="/signup/images/icons/favicon.ico" />
     <!-- Icons font CSS-->
     <link href="/signup/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="/signup/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Vendor CSS-->
     <link href="/signup/vendor/select2/select2.min.css" rel="stylesheet" media="all">
@@ -36,9 +38,10 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    
-                                    <input class="input--style-4" type="text" name="first_name" placeholder="First Name" value="<%=qs.fName %>" >
-                                    
+
+                                    <input class="input--style-4" type="text" name="name" placeholder="First Name"
+                                        value="<%=qs.name%>">
+
                                     <span class="symbol-input100">
                                         <i class="fa fa-user " aria-hidden="true"></i>
                                     </span>
@@ -46,22 +49,24 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                   
-                                    <input class="input--style-4" type="text" name="last_name" placeholder="Last Name" value="<%=qs.lName%>" >
+
+                                    <input class="input--style-4" type="email" name="email" placeholder="Email"
+                                        value="<%=qs.email%>">
                                     <span class="symbol-input100">
-                                        <i class="fa fa-user " aria-hidden="true"></i>
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </span>
                                 </div>
                             </div>
+
                         </div>
-                        
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                   
+
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthday" placeholder ="Birth Date"  value="q">
-                                        
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthdate"
+                                            placeholder="Birth Date" value="<%=qs.birthdate%>">
                                         <span class="symbol-input100">
                                             <i class="fa fa-birthday-cake " aria-hidden="true"></i>
                                         </span>
@@ -71,16 +76,21 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    
-                                    <div class="p-t-10">
-                                        <label class="radio-container m-r-45">Male
-                                            <input type="radio" checked="checked" name="gender" value="<%=qs.male%>">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">Female
-                                            <input type="radio" name="gender" value="<%=qs.female%>">
-                                            <span class="checkmark"></span>
-                                        </label>
+
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="sex">
+                                            <option disabled="disabled" selected="selected" value="<%=qs.sex%>">Choose
+                                                Your Gender</option>
+
+                                            <% var options=["Male","Female"]; %>
+                                                <% for (var i=0;i<3;i++) { %>
+
+                                                    <option value="<%= options[i] %>">
+                                                        <%=options[i] %>
+                                                    </option>
+                                                    <% } %>
+                                        </select>
+                                        <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                             </div>
@@ -88,17 +98,19 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    
-                                    <input class="input--style-4" type="email" name="email" placeholder="Email" value="<%=qs.email%>" > 
+
+                                    <input class="input--style-4" type="password" name="password"
+                                        placeholder=" Password" value="<%=qs.password%>">
                                     <span class="symbol-input100">
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
                                     </span>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                               
-                                    <input class="input--style-4" type="text" name="phone" placeholder="Phone Number" value="<%=qs.phone%>">
+
+                                    <input class="input--style-4" type="text" name="phoneNumber"
+                                        placeholder="Phone Number" value="<%=qs.phoneNumber%>">
                                     <span class="symbol-input100">
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </span>
@@ -106,10 +118,12 @@
                             </div>
                         </div>
                         <div class="row row-space">
+
                             <div class="col-2">
                                 <div class="input-group">
-                                    
-                                    <input class="input--style-4" type="password" name="pass" placeholder="Password" value="<%=qs.pass%>" >
+
+                                    <input class="input--style-4" type="password" name="passwordConfirm"
+                                        placeholder="Confirm Password" value="<%=qs.passwordConfirm%>">
                                     <span class="symbol-input100">
                                         <i class="fa fa-lock" aria-hidden="true"></i>
                                     </span>
@@ -117,35 +131,31 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    
-                                    <input class="input--style-4" type="password" name="pass" placeholder="Confirm Password" value="<%=qs.conPass%>">
-                                    <span class="symbol-input100">
-                                        <i class="fa fa-lock" aria-hidden="true"></i>
-                                    </span>
+
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="role">
+                                            <option disabled="disabled" selected="selected" value="<%=qs.role%>">Choose
+                                                Your Title</option>
+
+                                            <% var options=["Doctor","Patient","Technician"]; %>
+                                                <% for (var i=0;i<3;i++) { %>
+
+                                                    <option value="<%= options[i] %>">
+                                                        <%=options[i] %>
+                                                    </option>
+                                                    <% } %>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
-                        <div class="input-group">
-                            
-                            <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="subject">
-                            <option disabled="disabled" selected="selected">Choose Your Title</option>
-                            <%  
-                             var options=["Doctor","Patient","Technician"]  ;
-                             for(var i=0;i<options.length;i++) 
-                             {
-                                 var selected =(config[0].volume==i) ?"selected":"";
-                                 %><option value="<%=options[ i ] %>" <%=selected %>><%=i %></option><%
-                             }
-                            %>
-                            </select>
-                            <div class="select-dropdown"></div>
-                            </div>
-                            </div>
-                        
-                       
+
+
+
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit" value="submit">SIGN UP</button>
+                            <button class="btn btn--radius-2 btn--blue" type="submit">SIGN UP</button>
                         </div>
                     </form>
                 </div>
@@ -153,14 +163,14 @@
         </div>
     </div>
 
-
+    <!-- Jquery JS-->
     <script src="/signup/vendor/jquery/jquery.min.js"></script>
- 
+    <!-- Vendor JS-->
     <script src="/signup/vendor/select2/select2.min.js"></script>
     <script src="/signup/vendor/datepicker/moment.min.js"></script>
     <script src="/signup/vendor/datepicker/daterangepicker.js"></script>
 
-    
+    <!-- Main JS-->
     <script src="/signup/js/global.js"></script>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->

@@ -10,10 +10,11 @@ const patientSchema = new mongoose.Schema({
   },
   ssn: {
     type: Number,
-    unique: true,
+    //unique: true,
     minlength: [14, 'Not valid'],
     maxlength: [14, 'Not valid'],
-    required: [true, 'You must enter your SSN']
+    //required: [true, 'You must enter your SSN']
+    select: false
   },
   email: {
     type: String,

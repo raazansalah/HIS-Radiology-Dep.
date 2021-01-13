@@ -1,6 +1,6 @@
 const express = require('express');
 const viewsController = require('../controllers/viewsController');
-const authController = require('../controllers/authController');
+//const authController = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -15,7 +15,9 @@ router.get('/doctors', viewsController.getAllDoctors);
 router.get('/techs', viewsController.getAllTechnicians);
 
 // router.get('/signup', viewsController.signup);
-router.post('/signup', authController.signup);
+router
+  .get('/signup', viewsController.getSignUp)
+  .post('/signup', viewsController.postSignUp);
 router.post('/addDevice', viewsController.addDevice);
 
 module.exports = router;

@@ -11,10 +11,11 @@ const staffSchema = new mongoose.Schema(
     },
     ssn: {
       type: Number,
-      unique: true,
+      //unique: true,
       minlength: [14, 'Not valid'],
       maxlength: [14, 'Not valid'],
-      required: [true, 'You must enter your SSN']
+      //required: [true, 'You must enter your SSN']
+      select: false
     },
     email: {
       type: String,
@@ -39,7 +40,7 @@ const staffSchema = new mongoose.Schema(
       }
     },
     passwordCreatedAt: {
-      type: String,
+      type: Date,
       default: Date.now
     },
     sex: {
@@ -61,7 +62,7 @@ const staffSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['doctor', 'technician', 'admin'],
+      enum: ['Doctor', 'Technician', 'Admin'],
       required: [true, 'You must specify your role']
     },
     passwordResetToken: { type: String },
@@ -82,15 +83,12 @@ const staffSchema = new mongoose.Schema(
   }
 );
 
-<<<<<<< HEAD
-staffSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'deviceManaged'
-  });
-});
+// staffSchema.pre(/^find/, function(next) {
+//   this.populate({
+//     path: 'deviceManaged'
+//   });
+// });
 
-=======
->>>>>>> e478cfecc1e79c232bab8617643f47e7e6d1baf1
 staffSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next(); //So that we don't change it every time the staff updates his profile
 
