@@ -141,7 +141,7 @@ exports.getAllComplains = catchAsync(async (req, res) => {
   // });
 });
 
-exports.renderAppointment = catchAsync(async (req, res, next) => {
+exports.getAppointment = catchAsync(async (req, res, next) => {
   res.status(200).render('viewAppointments', { qs: req.body });
 });
 
@@ -157,10 +157,25 @@ exports.postAppointment = catchAsync(async (req, res, next) => {
   res.status(200).render('viewAppointments', { qs: req.body });
 });
 
-exports.renderTechProfile = catchAsync(async (req, res, next) => {
+exports.getDoctor = catchAsync(async (req, res, next) => {
+  const doctor = await Staff.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
+
+  if (!doctor) {
+    //If the ID was valid, the output data will be null
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  res.status(200).render('profileDoc', {
+    doctor
+  });
+});
+
+exports.getTech = catchAsync(async (req, res, next) => {
+  const tech = await Staff.findById(req.user.id);
+
   res
     .status(200)
-    .render('profileTech', { Technicians: req.body, devices: req.body });
+    .render('profileTech', { Technicians: tech, devices: req.body });
 });
 
 //=================================================================AUTH
@@ -258,18 +273,5 @@ const upload = multer({
 
 exports.uploadFile = upload.single('file');
 // ======================================UPLOADS
-
-exports.getDoctor = catchAsync(async (req, res, next) => {
-  const doctor = await Staff.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
-
-  if (!doctor) {
-    //If the ID was valid, the output data will be null
-    return next(new AppError('No document found with that ID', 404));
-  }
-
-  res.status(200).render('profileDoc', {
-    doctor
-  });
-});
 
 exports.addDevice = factory.createOne(Device);

@@ -11,13 +11,13 @@ router
   .get('/contactus', viewsController.getContactForm)
   .post('/contactus', viewsController.postContactForm);
 router
-  .get('/appointments', viewsController.renderAppointment)
+  .get('/appointments', viewsController.getAppointment)
   .post('/appointments', viewsController.postAppointment);
 router.get('/devices', viewsController.getDevices);
 router.get('/patients', viewsController.getAllPatients);
 router.get('/doctors', viewsController.getAllDoctors);
 router.get('/techs', viewsController.getAllTechnicians);
-router.get('/myTech', viewsController.renderTechProfile);
+router.get('/getTech', viewsController.getTech);
 
 router.post('/uploads', viewsController.uploadFile);
 router
