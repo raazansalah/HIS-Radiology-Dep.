@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title> Patients </title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/spreadsheet-512.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>	
+	<div class="limiter">
+		<div class="container-table100">
+			<header class="header-area header-sticky">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<nav class="main-nav">
+								<!-- ***** Logo Start ***** -->
+								<a href="#" class="logo">
+									<img src="images/logo-3.png" alt="Rad"/>
+								</a>
+								<!-- ***** Logo End ***** -->
+								<!-- ***** Menu Start ***** -->
+								<ul class="nav">
+									<li><a href="views/home.ejs" >Home</a></li>
+									<li><a href="views/viewPatient.ejs" >SignUp</a></li>
+									<li><a href="views/viewDoc.ejs">Login</a></li>
+									<li><a href="views/viewTech.ejs" class="active">PatientView</a></li>
+									
+								</ul>
+								<a class='menu-trigger'>
+									<span>Menu</span>
+								</a>
+								<!-- ***** Menu End ***** -->
+							</nav>
+						</div>
+					</div>
+				</div>
+			</header> 
+			<div class="wrap-table100">
+				<div class="table100">
+					<% if (Patients.length > 0) { %>	
+						<table>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Name</th>
+									<th class="column2">SSN</th>
+									<th class="column3">ID</th>
+									<th class="column4">Sex</th>
+									<th class="column5">Birthdate</th>
+									
+									<th class="column7">Phone</th>
+									
+									<th class="column9">Email</th>
+									<!--<th class="column10">Password</th>-->
+									<th class="column10">Scans</th>
+								</tr>
+						    </thead>
+						    <tbody>
+							<% Patients.forEach(Patient => { %>
+								<tr>
+									<td class="column1"><%= Patient.p_name %></td>
+									<td class="column2"><%= Patient.p_ssn %></td>
+									<td class="column3"><%= Patient.p_id %></td>
+									<td class="column4"><%= Patient.p_sex %></td>
+									<td class="column5"><%= Patient.p_bdate %></td>
+									
+									<td class="column7"><%= Patient.p_phone %></td>
+									
+									<td class="column9"><%= Patient.p_email %></td>
+									<td class="column10"><%= Patient.p_scans %></td>
+								</tr>
+							<% }) %>
+							<div class="button_cont"> <button class="example_b" onclick="btnClicked()" target="_blank" rel="nofollow noopener">Book</button>
+								<button class="example_b" onclick="btnClicked1()" target="_blank" rel="nofollow noopener">Complain</button>
+							</div>
+						    
+					
+					<%  } %>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="column">
+						  <img src="images/thanks.jpeg" alt="Snow" style="width:100%">
+						</div>
+						<div class="column">
+						  <img src="images/thanks.jpeg" alt="Forest" style="width:100%">
+						</div>
+						<div class="column">
+						  <img src="images/thanks.jpeg" alt="Mountains" style="width:100%">
+						</div>
+					  </div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<style>
+		* {
+		  box-sizing: border-box;
+		}
+		
+		.column {
+		  float: left;
+		  width: 33.33%;
+		  padding: 5px;
+		}
+		
+		/* Clearfix (clear floats) */
+		.row::after {
+		  content: "";
+		  clear: both;
+		  display: table;
+		}
+		</style>
+    <script>
+		function btnClicked(){
+			document.location.href="https://www.google.com/";
+		}
+		function btnClicked1(){
+			document.location.href="https://www.google.com/";
+		}
+	</script>
+
+	
+
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>

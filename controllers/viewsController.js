@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const JWT = require('jsonwebtoken');
 const factory = require('./handleController');
 const Device = require('../models/deviceModel');
+const Appointment = require('../models/appointmentModel');
 const Staff = require('../models/staffModel');
 const Patient = require('../models/patientModel');
 const Complain = require('../models/complainModel');
@@ -115,6 +116,22 @@ exports.getAllTechnicians = catchAsync(async (req, res) => {
   res.status(200).render('viewTechs', {
     technicians: technician
   });
+});
+
+exports.renderAppointment = catchAsync(async (req, res, next) => {
+  res.status(200).render('viewAppointments', { qs: req.body });
+});
+
+exports.postAppointment = catchAsync(async (req, res, next) => {
+  console.log(req.body);
+  await Appointment.create({
+    patientName: req.body.name,
+    patientMail: req.body.email,
+    addmissionDate: req.body.dvisit,
+    addmissionTime: req.body.tvisit,
+    scanType: req.body.scantype
+  });
+  res.status(200).render('viewAppointments', { qs: req.body });
 });
 
 // exports.signup = (req, res) => {

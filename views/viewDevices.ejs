@@ -41,7 +41,7 @@
 									<li><a href="/doctors">Doctors</a></li>
 									<li><a href="/techs">Technicians</a></li>
 									<li><a href="/devices" class="active">Devices</a></li>
-									<li><a href="/dashboard">Admin Dashboard</a></li>
+									<li><a href="/dashboard">Dashboard</a></li>
 									<li><a href="/contactus">Contact Us</a></li>
 								</ul>
 								<a class='menu-trigger'>
@@ -59,7 +59,7 @@
 						<table>
 							<thead>
 								<tr class="table100-head">
-									<th class="column2">Name</th>
+									<th class="column1">Name</th>
 									<th class="column2">Model</th>
 									<th class="column3">Service Date</th>
 									<th class="column4">Sub Section</th>
@@ -76,12 +76,8 @@
 									<td class="column3"><%= device.serviceDate %></td>
 									<td class="column4"><%= device.subSection %></td>
 									<td class="column5"><%= device.arrivalDate %></td>
-<<<<<<< HEAD
-									<td class="column6"><%= device.doctorId %></td>
-									<td class="column7"><%= device.techId %></td>
-=======
-									<td class="column6"><%= device.staffs[devices.length-1]._id %></td>
->>>>>>> 704391adfe2808e4f5c30b6d81616b93ec6d0155
+									<td class="column7"><%= device.staffs[0]._id %></td>
+									<td class="column6"><%= device.staffs[1]._id %></td>
 								</tr>
 							<% }) %>
 							<div class="button_cont"> <button class="example_b" onclick="btnClicked()" target="_blank" rel="nofollow noopener">Add</button>
