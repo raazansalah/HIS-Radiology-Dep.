@@ -275,4 +275,17 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getPatient = catchAsync(async (req, res, next) => {
+  const patient = await Patient.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
+
+  if (!patient) {
+    //If the ID was valid, the output data will be null
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  res.status(200).render('profileDoc', {
+    patient
+  });
+});
+
 exports.addDevice = factory.createOne(Device);
