@@ -283,7 +283,7 @@ exports.getPatient = catchAsync(async (req, res, next) => {
     return next(new AppError('No document found with that ID', 404));
   }
 
-  res.status(200).render('profileDoc', {
+  res.status(200).render('profilePatient', {
     patient
   });
 });
