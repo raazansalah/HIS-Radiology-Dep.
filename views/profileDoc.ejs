@@ -8,7 +8,7 @@
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="/docProfile/images/icons/spreadsheet-512.png" />
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/docProfile//docProfile/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/docProfile/vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/docProfile/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<!--===============================================================================================-->
@@ -100,12 +100,11 @@
 							<div class="container" style="height: 170px;
 							position: relative;
 							margin-top: 30px;
-							"> 
-								<=% typeof msg !='undefined' ? msg :'' %>
+							">
 								<form action="/upload" method="POST" enctype="multipart/form-data">
-									<div class="file-field input-field" >
-										<div class="btn grey" >
-											
+									<div class="file-field input-field">
+										<div class="btn grey">
+
 											<input name="myImage" type="file" style="color:black !important;
 											text-transform: uppercase;
 											text-decoration: none;
@@ -120,7 +119,7 @@
 											border: none;
 											transition: all 0.4s ease 0s;">
 										</div>
-										<div class="file-path-wrapper" >
+										<div class="file-path-wrapper">
 											<input class="file-path validate" type="text" style="color: #fff !important;
 											text-transform: uppercase;
 											text-decoration: none;
@@ -164,8 +163,8 @@
 			</div>
 			<div class="wrap-table100">
 				<div class="table100">
-					<% if (doctor.deviceManaged){ %>
-						<table>
+					<table>
+						<% if(device) {%>
 							<thead>
 								<tr class="table100-head">
 									<th class="column1">Name</th>
@@ -181,26 +180,24 @@
 							<tbody>
 								<tr>
 									<td class="column1">
-										<%= doctor.deviceManaged.name %>
+										<%= device.name %>
 									</td>
 									<td class="column2">
-										<%= doctor.deviceManaged.model %>
+										<%= device.model %>
 									</td>
 									<td class="column3">
-										<%= doctor.deviceManaged.serviceDate %>
+										<%= device.serviceDate %>
 									</td>
 									<td class="column4">
-										<%= doctor.deviceManaged.subSection %>
+										<%= device.subSection %>
 									</td>
 									<td class="column5">
-										<%= doctor.deviceManaged.arrivalDate %>
+										<%= device.arrivalDate %>
 									</td>
 								</tr>
+								<%}%>
 							</tbody>
-						</table>
-
-
-						<%}%>
+					</table>
 				</div>
 			</div>
 		</div>

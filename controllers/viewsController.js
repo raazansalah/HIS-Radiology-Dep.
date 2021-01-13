@@ -158,16 +158,16 @@ exports.postAppointment = catchAsync(async (req, res, next) => {
 });
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
-  const doctor = await await Staff.findById(req.user.id);
+  const doctor = await Staff.findById(req.user.id).populate('deviceManaged');
   const device = await Device.findById(doctor.deviceManaged);
   if (!doctor) {
     //If the ID was valid, the output data will be null
     return next(new AppError('No document found with that ID', 404));
   }
-
-  res.status(200).render('profileDoc2', {
-    doctors: doctor,
-    devices: device
+  //console.log(device);
+  res.status(200).render('profileDoc', {
+    doctor,
+    device
   });
 });
 
@@ -185,11 +185,9 @@ exports.getPatient = catchAsync(async (req, res, next) => {
 });
 
 exports.getTech = catchAsync(async (req, res, next) => {
-  const tech = await Staff.findById(req.user.id);
-
-  res
-    .status(200)
-    .render('profileTech', { Technicians: tech, devices: req.body });
+  const tech = await Staff.findById(req.user.id).populate('deviceManaged');
+  const device = await Device.findById(tech.deviceManaged);
+  res.status(200).render('profileTech', { tech, device });
 });
 
 //=================================================================AUTH
@@ -222,7 +220,7 @@ exports.getSignUp = catchAsync(async (req, res, next) => {
 
 exports.postSignUp = catchAsync(async (req, res, next) => {
   let newUser;
-  console.log(req.body);
+  //console.log(req.body);
   if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
   else newUser = await Staff.create(req.body);
   //To make him login instantly, we'll send him a token
@@ -263,6 +261,30 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+exports.getLogin = catchAsync(async (req, res, next) => {
+  res.status(200).render('login', { qs: req.body });
+});
+
+exports.postLogin = catchAsync(async (req, res, next) => {
+  const { email, password, role } = req.body; //Object deconstructing
+
+  //check if email and password exist
+  if (!email || !password)
+    return next(new AppError('Please enter email and password', 400));
+
+  //check if user exist and password is correct
+  let user;
+  if (role === 'Patient')
+    user = await Patient.findOne({ email }).select('+password');
+  else user = await Staff.findOne({ email }).select('+password');
+  if (!user || !(await user.correctPass(password, user.password)))
+    //Order is important here for .compare
+    return next(new AppError('Invalid email or password', 400));
+
+  //send a token
+  createSendToken(user, 200, res);
+});
 //=================================================================AUTH
 
 // ======================================UPLOADS
