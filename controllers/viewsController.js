@@ -201,7 +201,7 @@ exports.postSignUp = catchAsync(async (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   //Getting the token from the header
-  const { cookies } = req.cookies;
+  const { cookies } = req;
   let token;
   if (cookies.jwt) token = cookies.jwt; //Bearer 21324ywdh728y4ufihewe24twtw3
   if (!token) return next(new AppError('You are not logged in', 401));
@@ -232,5 +232,18 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+exports.getDoctor = catchAsync(async (req, res, next) => {
+  const doctor = await Staff.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
+
+  if (!doctor) {
+    //If the ID was valid, the output data will be null
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  res.status(200).render('profileDoc', {
+    doctor
+  });
+});
 
 exports.addDevice = factory.createOne(Device);

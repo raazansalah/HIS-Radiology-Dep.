@@ -1,62 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Contact Us</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="/contact/images/download.png"/>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/contact/images/download.png" />
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/contact/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/contact/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/contact/vendor/animate/animate.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/contact/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/contact/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/contact/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/contact/css/main.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 </head>
+
 <body>
 
 	<div class="bg-contact100" style="background-image: url('images/imageedit_6_2117734224.gif');">
 		<div class="container-contact100">
 			<header class="header-area header-sticky">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <nav class="main-nav">
-                                <!-- ***** Logo Start ***** -->
-                                <a href="#" class="logo">
-                                    <img src="/contact/images/logo-3.png" alt="Rad"/>
-                                </a>
-                                <!-- ***** Logo End ***** -->
-                                <!-- ***** Menu Start ***** -->
-                                <ul class="nav">
-									<li><a href="/home" >Home</a></li>
-									<li><a href="views/contactUs.ejs">Signup</a></li>
-									<li><a href="views/contactUs.ejs">Login</a></li>
-                                    <li><a href="/patients">Patient</a></li>
-                                    <li><a href="/doctors">Doctor</a></li>
-                                    <li><a href="/techs">Technician</a></li>
-                                    <li><a href="/devices" >Device</a></li>
-                                    <li><a href="/dashboard">Dashboard</a></li>
-									<li><a href="/contactus"class="active" >ContactUs</a></li>
-									
-                                </ul>
-                                <a class='menu-trigger'>
-                                    <span>Menu</span>
-                                </a>
-                                <!-- ***** Menu End ***** -->
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </header> 
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<nav class="main-nav">
+								<!-- ***** Logo Start ***** -->
+								<a href="#" class="logo">
+									<img src="/contact/images/logo-3.png" alt="Rad" />
+								</a>
+								<!-- ***** Logo End ***** -->
+								<!-- ***** Menu Start ***** -->
+								<ul class="nav">
+									<li><a href="/home">Home</a></li>
+									<li><a href="/signup">Signup</a></li>
+									<li><a href="/login">Login</a></li>
+									<li><a href="/patients">Patient</a></li>
+									<li><a href="/doctors">Doctor</a></li>
+									<li><a href="/techs">Technician</a></li>
+									<li><a href="/devices">Device</a></li>
+									<li><a href="/dashboard">Dashboard</a></li>
+									<li><a href="/contactus" class="active">ContactUs</a></li>
+
+								</ul>
+								<a class='menu-trigger'>
+									<span>Menu</span>
+								</a>
+								<!-- ***** Menu End ***** -->
+							</nav>
+						</div>
+					</div>
+				</div>
+			</header>
 
 			<div class="wrap-contact100">
 				<div class="contact100-pic js-tilt" data-tilt>
@@ -65,10 +67,10 @@
 
 				<form class="contact100-form validate-form" method="POST" action="/contactus">
 					<span class="contact100-form-title">
-						Contact Us 
+						Contact Us
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Name is required">
+					<div class="wrap-input100 validate-input" data-validate="Name is required">
 						<input class="input100" type="text" name="name" placeholder="Name" value="<%= qs.name%>">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -76,16 +78,17 @@
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Email"value="<%= qs.email%>" >
+					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Email" value="<%= qs.email%>">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid date is required">
-						<input class="input100" type="date" name="dvisit" placeholder="Date of visit"value="<%= qs.date%>" >
+					<div class="wrap-input100 validate-input" data-validate="Valid date is required">
+						<input class="input100" type="date" name="dvisit" placeholder="Date of visit"
+							value="<%= qs.date%>">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -93,8 +96,9 @@
 					</div>
 
 
-					<div class="wrap-input100 validate-input" data-validate = "Message is required">
-						<textarea class="input100" name="message" placeholder="Message" value="<%= qs.message%>"></textarea>
+					<div class="wrap-input100 validate-input" data-validate="Message is required">
+						<textarea class="input100" name="message" placeholder="Message"
+							value="<%= qs.message%>"></textarea>
 						<span class="focus-input100"></span>
 					</div>
 
@@ -111,32 +115,33 @@
 
 
 
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/contact/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/contact/vendor/bootstrap/js/popper.js"></script>
 	<script src="/contact/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/contact/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/contact/vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
+	<script>
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
 	</script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/contact/js/main.js"></script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-  gtag('config', 'UA-23581568-13');
-</script>
+		gtag('config', 'UA-23581568-13');
+	</script>
 
 </body>
+
 </html>

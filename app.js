@@ -6,6 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 const viewRouter = require('./routes/viewRoutes');
@@ -40,6 +41,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 //the limit is a security option to limit data passed to body
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(cookieParser());
 
 //Data sanitization against NoSQL query injection
 //for example: adding this {"$gt":""} to email, always returns true
