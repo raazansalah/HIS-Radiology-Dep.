@@ -97,9 +97,62 @@
 									<%= doctor.email %>
 								</td>
 							</tr>
-							<div class="button_cont">
-								<button class="example_b" onclick="btnClicked1()" target="_blank"
-									rel="nofollow noopener">Upload Report</button>
+							<div class="container" style="height: 170px;
+							position: relative;
+							margin-top: 30px;
+							"> 
+								<=% typeof msg !='undefined' ? msg :'' %>
+								<form action="/upload" method="POST" enctype="multipart/form-data">
+									<div class="file-field input-field" >
+										<div class="btn grey" >
+											
+											<input name="myImage" type="file" style="color:black !important;
+											text-transform: uppercase;
+											text-decoration: none;
+											background:white;
+											width:300px;
+											margin-left: 35%;
+											height:20px;
+											margin-right: 30px;
+											
+											display: inline-block;
+											position: relative;
+											border: none;
+											transition: all 0.4s ease 0s;">
+										</div>
+										<div class="file-path-wrapper" >
+											<input class="file-path validate" type="text" style="color: #fff !important;
+											text-transform: uppercase;
+											text-decoration: none;
+											background:white;
+											width:300px;
+											margin-left: 35%;
+											height:30px;
+											margin-top: 15px;
+											margin-right: 30px;
+											border-radius: 50px;
+											display: inline-block;
+											position: relative;
+											border: none;
+											transition: all 0.4s ease 0s;">
+										</div>
+									</div>
+									<button type="submit" class="btn" style="color: #fff !important;
+									text-transform: uppercase;
+									text-decoration: none;
+									background: #fc61bb;
+									margin-top: 15px;
+									margin-left: 43%;
+									width:100px;
+									height:50px;
+									margin-right: 30px;
+									border-radius: 50px;
+									display: inline-block;
+									position: relative;
+									border: none;
+									transition: all 0.4s ease 0s;">SUBMIT</button>
+								</form>
+
 							</div>
 						</tbody>
 					</table>
