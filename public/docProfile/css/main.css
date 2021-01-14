@@ -24,7 +24,7 @@ body, html {
 	font-family: sans-serif;
 }
 .header-area {
-  position: sticky;
+  position: fixed;
   top: 30px;
   left: 0px;
   right: 0px;

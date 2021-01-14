@@ -15,7 +15,6 @@ router.get('/patients', viewsController.getAllPatients);
 router.get('/doctors', viewsController.getAllDoctors);
 router.get('/techs', viewsController.getAllTechnicians);
 
-router.post('/upload', viewsController.uploadFile);
 router
   .get('/signup', viewsController.getSignUp)
   .post('/signup', viewsController.postSignUp);
@@ -26,6 +25,8 @@ router
 router.post('/addDevice', viewsController.addDevice);
 
 router.use(viewsController.protect);
+
+router.post('/upload', viewsController.uploadFile);
 
 router.get(
   '/getDoctor',

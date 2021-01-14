@@ -26,7 +26,7 @@ const staffSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      minLength: [8, 'The password should be 8 characters minimum'],
+      minlength: [8, 'The password should be 8 characters minimum'],
       required: [true, 'You must enter a password']
     },
     passwordConfirm: {

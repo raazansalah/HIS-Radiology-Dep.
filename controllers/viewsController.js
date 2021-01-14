@@ -158,14 +158,14 @@ exports.postAppointment = catchAsync(async (req, res, next) => {
 });
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
-  const doctor = await Staff.findById(req.user.id).populate('deviceManaged');
+  const doctor = await Staff.findById(req.user.id);
   const device = await Device.findById(doctor.deviceManaged);
   if (!doctor) {
     //If the ID was valid, the output data will be null
     return next(new AppError('No document found with that ID', 404));
   }
   //console.log(device);
-  res.status(200).render('profileDoc', {
+  res.status(200).render('profileDoc2', {
     doctor,
     device
   });
@@ -308,9 +308,15 @@ const multerStorage = multer.diskStorage({
 
 const upload = multer({
   storage: multerStorage
+  // fileFilter: multerFilter
 });
 
-exports.uploadFile = upload.single('file');
+exports.uploadFile = (req, res, next) => {
+  upload.single('myImage');
+
+  if (req.user.role === 'Doctor') res.redirect('/getDoctor');
+  if (req.user.role === 'Technician') res.redirect('/getTech');
+};
 // ======================================UPLOADS
 
 exports.addDevice = factory.createOne(Device);
