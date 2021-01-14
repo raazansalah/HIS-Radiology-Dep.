@@ -11,6 +11,7 @@ const Patient = require('../models/patientModel');
 const Complain = require('../models/complainModel');
 const Scan = require('../models/scanModel');
 const catchAsync = require('../utils/catchAsync');
+const GoogleCalendar = require('../calendar');
 const APIFeatures = require('../utils/apifeatures');
 
 exports.getHome = catchAsync(async (req, res, next) => {
@@ -147,7 +148,6 @@ exports.getAppointment = catchAsync(async (req, res, next) => {
 });
 
 exports.postAppointment = catchAsync(async (req, res, next) => {
-  //console.log(req.body);
   await Appointment.create({
     patientName: req.body.name,
     patientMail: req.body.email,
@@ -155,6 +155,8 @@ exports.postAppointment = catchAsync(async (req, res, next) => {
     addmissionTime: req.body.tvisit,
     scanType: req.body.scantype
   });
+  const date = `${req.body.dvisit}T${req.body.tvisit}:00+02:00`;
+  GoogleCalendar(req.body.email, date, req.body.scantype);
   res.status(200).render('viewAppointments', { qs: req.body });
 });
 
