@@ -3,67 +3,73 @@ const validator = require('validator');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
-const patientSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'You must enter your name']
-  },
-  ssn: {
-    type: Number,
-    //unique: true,
-    minlength: [14, 'Not valid'],
-    maxlength: [14, 'Not valid'],
-    //required: [true, 'You must enter your SSN']
-    select: false
-  },
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    required: [true, 'You must enter an email'],
-    validate: [validator.isEmail, 'Not a valid email']
-  },
-  password: {
-    type: String,
-    minLength: [8, 'The password should be 8 characters minimum'],
-    required: [true, 'You must enter a password']
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      validator: function(el) {
-        return el === this.password;
-      },
-      message: "Passwords don't match"
+const patientSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'You must enter your name']
+    },
+    ssn: {
+      type: Number,
+      //unique: true,
+      minlength: [14, 'Not valid'],
+      maxlength: [14, 'Not valid'],
+      //required: [true, 'You must enter your SSN']
+      select: false
+    },
+    email: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      required: [true, 'You must enter an email'],
+      validate: [validator.isEmail, 'Not a valid email']
+    },
+    password: {
+      type: String,
+      minLength: [8, 'The password should be 8 characters minimum'],
+      required: [true, 'You must enter a password']
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      validate: {
+        validator: function(el) {
+          return el === this.password;
+        },
+        message: "Passwords don't match"
+      }
+    },
+    passwordChangedAt: {
+      type: Date,
+      default: Date.now()
+    },
+    sex: {
+      type: String,
+      enum: ['Male', 'Female']
+    },
+    birthdate: {
+      type: Date
+    },
+    phoneNumber: {
+      type: Number
+    },
+    role: {
+      type: String,
+      default: 'user'
+    },
+    passwordResetToken: { type: String },
+    passwordResetExpire: { type: Date },
+    active: {
+      type: Boolean,
+      select: false,
+      default: true
     }
   },
-  passwordChangedAt: {
-    type: Date,
-    default: Date.now()
-  },
-  sex: {
-    type: String,
-    enum: ['Male', 'Female']
-  },
-  birthdate: {
-    type: Date
-  },
-  phoneNumber: {
-    type: Number
-  },
-  role: {
-    type: String,
-    default: 'user'
-  },
-  passwordResetToken: { type: String },
-  passwordResetExpire: { type: Date },
-  active: {
-    type: Boolean,
-    select: false,
-    default: true
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
-});
+);
 
 patientSchema.virtual('scans', {
   ref: 'Scan',
