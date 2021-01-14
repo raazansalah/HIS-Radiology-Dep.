@@ -44,16 +44,7 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 });
 
 exports.getDevices = catchAsync(async (req, res, next) => {
-<<<<<<< HEAD
-  const devices = await Device.find().populate({
-    path: 'staffs',
-    model: 'Staff',
-    select: 'email deviceManaged'
-  });
-
-=======
   const devices = await Device.find().populate('staffs');
->>>>>>> d19cfa0a0e8b640adf75e0ddf9d3c2fec77259cd
   console.log(devices);
   res.status(200).render('viewDevices', {
     devices
