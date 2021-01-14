@@ -49,7 +49,6 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 exports.getDevices = catchAsync(async (req, res, next) => {
   const query = Device.find().populate('staffs');
   const devices = await query;
-  console.log(devices[0].staffs.length);
   res.status(200).render('viewDevices', {
     devices
   });
