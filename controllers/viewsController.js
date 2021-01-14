@@ -47,8 +47,9 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 });
 
 exports.getDevices = catchAsync(async (req, res, next) => {
-  const devices = await Device.find().populate('staffs');
-  console.log(devices);
+  const query = Device.find().populate('staffs');
+  const devices = await query;
+  console.log(devices[0].staffs.length);
   res.status(200).render('viewDevices', {
     devices
   });
@@ -187,8 +188,6 @@ exports.getPatient = catchAsync(async (req, res, next) => {
   Object.keys(patient.scans).map(key =>
     fileNames.push(patient.scans[key].file)
   );
-
-  // const dirPath = path.join(__dirname, 'public/uploads');
 
   const files = fileNames.map(name => {
     return {
