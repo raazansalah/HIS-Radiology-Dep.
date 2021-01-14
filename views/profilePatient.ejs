@@ -97,7 +97,13 @@
 									<%= patient.email %>
 								</td>
 								<td class="column10">
-									<%= patient.scans %>
+									<ul>
+										<% files.map(file => { %>
+										  <li>
+											<a href="<%= file.url %>"><%= file.name %></a>
+										  </li>
+										<% }) %>
+									</ul>
 								</td>
 							</tr>
 							<div class="button_cont"> <button class="example_b" onclick="btnClicked()" target="_blank"
@@ -107,19 +113,7 @@
 							</div>
 						</tbody>
 					</table>
-					<div class="row">
-						<div class="column">
-							<img src="/patientProfile/images/thanks.jpeg" alt="Snow" style="width:100%">
-						</div>
-						<div class="column">
-							<img src="/patientProfile/images/thanks.jpeg" alt="Forest" style="width:100%">
-						</div>
-						<div class="column">
-							<img src="/patientProfile/images/thanks.jpeg" alt="Mountains" style="width:100%">
-						</div>
-					</div>
-
-
+				
 				</div>
 			</div>
 		</div>
