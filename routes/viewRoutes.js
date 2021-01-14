@@ -26,7 +26,11 @@ router.post('/addDevice', viewsController.addDevice);
 
 router.use(viewsController.protect);
 
-router.post('/upload', viewsController.uploadFile);
+router.post(
+  '/upload',
+  viewsController.uploadFile,
+  viewsController.userRedirect
+);
 
 router.get(
   '/getDoctor',

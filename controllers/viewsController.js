@@ -305,15 +305,13 @@ const multerStorage = multer.diskStorage({
 //     cb(new AppError('Not an image! Please upload only images.', 400), false);
 //   }
 // };
-
 const upload = multer({
   storage: multerStorage
   // fileFilter: multerFilter
 });
 
-exports.uploadFile = (req, res, next) => {
-  upload.single('myImage');
-
+exports.uploadFile = upload.single('myImage');
+exports.userRedirect = (req, res, next) => {
   if (req.user.role === 'Doctor') res.redirect('/getDoctor');
   if (req.user.role === 'Technician') res.redirect('/getTech');
 };
