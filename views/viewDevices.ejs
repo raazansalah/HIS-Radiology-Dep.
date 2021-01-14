@@ -66,6 +66,8 @@
 									<th class="column3">Service Date</th>
 									<th class="column4">Sub Section</th>
 									<th class="column5">Arrival Date</th>
+									<th class="column5">Doctor ID</th>
+									<th class="column5">Tech ID</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -86,7 +88,11 @@
 										<td class="column5">
 											<%= device.arrivalDate %>
 										</td>
-
+										<td class="column5">
+											<%= device.staffs[0]._id %>
+										</td><td class="column5">
+											<%= device.staffs[1]._id%>
+										</td>
 									</tr>
 									<% }) %>
 										<div class="button_cont"> <button class="example_b" onclick="btnClicked()"

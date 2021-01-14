@@ -5,6 +5,10 @@ const bcrypt = require('bcryptjs');
 
 const staffSchema = new mongoose.Schema(
   {
+    device: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Device'
+    },
     name: {
       type: String,
       required: [true, 'You must enter your name']
@@ -71,10 +75,6 @@ const staffSchema = new mongoose.Schema(
       type: Boolean,
       select: false,
       default: true
-    },
-    deviceManaged: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Device'
     }
   },
   {
@@ -83,12 +83,12 @@ const staffSchema = new mongoose.Schema(
   }
 );
 
-staffSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'deviceManaged'
-  });
-  next();
-});
+// staffSchema.pre(/^find/, function(next) {
+//   this.populate({
+//     path: 'deviceManaged'
+//   });
+//   next();
+// });
 
 staffSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next(); //So that we don't change it every time the staff updates his profile

@@ -27,7 +27,7 @@ const deviceSchema = new mongoose.Schema(
 // Virtual populate
 deviceSchema.virtual('staffs', {
   ref: 'Staff',
-  foreignField: 'deviceManaged',
+  foreignField: 'device',
   localField: '_id'
 });
 

@@ -1,4 +1,5 @@
 //const mongoose = require('mongoose');
+const path = require('path');
 const multer = require('multer');
 const JWT = require('jsonwebtoken');
 const { promisify } = require('util');
@@ -46,8 +47,8 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
 });
 
 exports.getDevices = catchAsync(async (req, res, next) => {
-  const devices = await Device.find().populate('staffs');
-  console.log(devices);
+  const query = Device.find().populate('staffs');
+  const devices = await query;
   res.status(200).render('viewDevices', {
     devices
   });
@@ -177,15 +178,27 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
 });
 
 exports.getPatient = catchAsync(async (req, res, next) => {
-  const patient = await Patient.findById(req.user.id); //can be: .findOne({_id:req.params.id}) as we did on shell
+  const patient = await Patient.findById(req.user.id).populate('scans'); //can be: .findOne({_id:req.params.id}) as we did on shell
 
   if (!patient) {
     //If the ID was valid, the output data will be null
     return next(new AppError('No document found with that ID', 404));
   }
+  const fileNames = [];
+  Object.keys(patient.scans).map(key =>
+    fileNames.push(patient.scans[key].file)
+  );
+
+  const files = fileNames.map(name => {
+    return {
+      name: path.basename(name, '.pdf'),
+      url: `/uploads/${name}`
+    };
+  });
 
   res.status(200).render('profilePatient', {
-    patient
+    patient,
+    files
   });
 });
 
