@@ -1,4 +1,0 @@
-doctorsNum => size of doctors array
-medicalNum => size of medical devices array
-techNum => size of technicians array
-patientsNum => size of patients array

@@ -165,7 +165,7 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
     return next(new AppError('No document found with that ID', 404));
   }
   //console.log(device);
-  res.status(200).render('profileDoc2', {
+  res.status(200).render('profileDoc', {
     doctor,
     device
   });
@@ -220,7 +220,7 @@ exports.getSignUp = catchAsync(async (req, res, next) => {
 
 exports.postSignUp = catchAsync(async (req, res, next) => {
   let newUser;
-  //console.log(req.body);
+  console.log(req.body);
   if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
   else newUser = await Staff.create(req.body);
   //To make him login instantly, we'll send him a token
