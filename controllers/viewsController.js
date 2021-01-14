@@ -76,17 +76,18 @@ exports.getAllPatients = catchAsync(async (req, res) => {
 });
 
 exports.getAllDoctors = catchAsync(async (req, res) => {
-  const features = new APIFeatures(Staff.find({ role: 'Doctor' }), req.query)
-    //.find({duration: 5, difficulty: 'easy'})
-    //.find().where('duration').equals("5")
-    //find is like SELECT in SQL, returns an array of objects
-    .filter()
-    .sort()
-    .limitFields()
-    .pagination();
+  // const features = new APIFeatures(Staff.find({ role: 'Doctor' }), req.query)
+  //   //.find({duration: 5, difficulty: 'easy'})
+  //   //.find().where('duration').equals("5")
+  //   //find is like SELECT in SQL, returns an array of objects
+  //   .filter()
+  //   .sort()
+  //   .limitFields()
+  //   .pagination();
 
   //const docs = await features.query.explain();
-  const doctor = await features.query;
+  const doctor = await Staff.find({ role: 'Doctor' });
+  console.log(doctor);
 
   //SEND RESPONSE
   res.status(200).render('viewDoctors', {
@@ -97,20 +98,20 @@ exports.getAllDoctors = catchAsync(async (req, res) => {
   // });
 });
 exports.getAllTechnicians = catchAsync(async (req, res) => {
-  const features = new APIFeatures(
-    Staff.find({ role: 'Technician' }),
-    req.query
-  )
-    //.find({duration: 5, difficulty: 'easy'})
-    //.find().where('duration').equals("5")
-    //find is like SELECT in SQL, returns an array of objects
-    .filter()
-    .sort()
-    .limitFields()
-    .pagination();
+  // const features = new APIFeatures(
+  //   Staff.find({ role: 'Technician' }),
+  //   req.query
+  // )
+  //   //.find({duration: 5, difficulty: 'easy'})
+  //   //.find().where('duration').equals("5")
+  //   //find is like SELECT in SQL, returns an array of objects
+  //   .filter()
+  //   .sort()
+  //   .limitFields()
+  //   .pagination();
 
   //const docs = await features.query.explain();
-  const technician = await features.query;
+  const technician = await Staff.find({ role: 'Technician' });
 
   //SEND RESPONSE
   res.status(200).render('viewTechs', {
