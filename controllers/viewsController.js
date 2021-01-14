@@ -9,6 +9,7 @@ const Appointment = require('../models/appointmentModel');
 const Staff = require('../models/staffModel');
 const Patient = require('../models/patientModel');
 const Complain = require('../models/complainModel');
+const Scan = require('../models/scanModel');
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/apifeatures');
 
@@ -167,7 +168,8 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
   //console.log(device);
   res.status(200).render('profileDoc', {
     doctor,
-    device
+    device,
+    qs: req.body
   });
 });
 
@@ -185,9 +187,9 @@ exports.getPatient = catchAsync(async (req, res, next) => {
 });
 
 exports.getTech = catchAsync(async (req, res, next) => {
-  const tech = await Staff.findById(req.user.id).populate('deviceManaged');
+  const tech = await Staff.findById(req.user.id);
   const device = await Device.findById(tech.deviceManaged);
-  res.status(200).render('profileTech', { tech, device });
+  res.status(200).render('profileTech', { tech, device, qs: req.body });
 });
 
 //=================================================================AUTH
@@ -220,7 +222,6 @@ exports.getSignUp = catchAsync(async (req, res, next) => {
 
 exports.postSignUp = catchAsync(async (req, res, next) => {
   let newUser;
-  console.log(req.body);
   if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
   else newUser = await Staff.create(req.body);
   //To make him login instantly, we'll send him a token
@@ -298,23 +299,20 @@ const multerStorage = multer.diskStorage({
   }
 });
 
-// const multerFilter = (req, file, cb) => {
-//   if (file.mimetype.startsWith('image')) {
-//     cb(null, true);
-//   } else {
-//     cb(new AppError('Not an image! Please upload only images.', 400), false);
-//   }
-// };
 const upload = multer({
   storage: multerStorage
-  // fileFilter: multerFilter
 });
 
 exports.uploadFile = upload.single('myImage');
-exports.userRedirect = (req, res, next) => {
+exports.userRedirect = catchAsync(async (req, res, next) => {
+  await Scan.create({
+    patient: req.body.id,
+    device: req.user.deviceManaged,
+    file: req.file.filename
+  });
   if (req.user.role === 'Doctor') res.redirect('/getDoctor');
   if (req.user.role === 'Technician') res.redirect('/getTech');
-};
+});
 // ======================================UPLOADS
 
 exports.addDevice = factory.createOne(Device);

@@ -15,7 +15,7 @@ const scanSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
-  image: {
+  file: {
     type: String
   }
 });
