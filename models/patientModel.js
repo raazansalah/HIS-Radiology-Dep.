@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 const patientSchema = new mongoose.Schema(
@@ -8,14 +7,6 @@ const patientSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, 'You must enter your name']
-    },
-    ssn: {
-      type: Number,
-      //unique: true,
-      minlength: [14, 'Not valid'],
-      maxlength: [14, 'Not valid'],
-      //required: [true, 'You must enter your SSN']
-      select: false
     },
     email: {
       type: String,
@@ -56,13 +47,6 @@ const patientSchema = new mongoose.Schema(
     role: {
       type: String,
       default: 'user'
-    },
-    passwordResetToken: { type: String },
-    passwordResetExpire: { type: Date },
-    active: {
-      type: Boolean,
-      select: false,
-      default: true
     }
   },
   {
@@ -70,6 +54,12 @@ const patientSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+patientSchema.virtual('age').get(function() {
+  return Math.trunc(
+    Math.abs(Date.now() - this.birthdate) / (1000 * 60 * 60 * 24 * 365)
+  );
+});
 
 patientSchema.virtual('scans', {
   ref: 'Scan',
@@ -84,7 +74,7 @@ patientSchema.virtual('appointments', {
 patientSchema.virtual('complains', {
   ref: 'Complain',
   foreignField: 'patient',
-  localField: '_id'
+  localField: 'email'
 });
 
 patientSchema.pre('save', async function(next) {
@@ -102,10 +92,6 @@ patientSchema.pre('save', function(next) {
   return next();
 });
 
-patientSchema.pre(/^find/, function() {
-  this.find({ active: { $ne: false } });
-});
-
 patientSchema.methods.correctPass = async function(candidatePass, Pass) {
   return await bcrypt.compare(candidatePass, Pass);
 };
@@ -116,20 +102,6 @@ patientSchema.methods.changedPass = function(tokenDate) {
     return passMod > tokenDate;
   }
   return false;
-};
-
-patientSchema.methods.createResetToken = function() {
-  const resetToken = crypto.randomBytes(32).toString('hex'); //random token
-  //console.log(resetToken);
-
-  this.passwordResetToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex'); //hashing random token, save in DB
-  //console.log({ resetToken }, this.passwordResetToken);
-  this.passwordResetExpire = Date.now() + 10 * 60 * 1000;
-
-  return resetToken;
 };
 
 const Patient = mongoose.model('Patient', patientSchema);

@@ -75,7 +75,6 @@ exports.getAllTechnicians = catchAsync(async (req, res) => {
 exports.getAllComplains = catchAsync(async (req, res) => {
   const complain = await Complain.find();
 
-  console.log(complain);
   res.status(200).render('viewComplains', {
     complains: complain
   });

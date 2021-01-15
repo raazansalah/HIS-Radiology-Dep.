@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 const staffSchema = new mongoose.Schema(
@@ -12,14 +11,6 @@ const staffSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, 'You must enter your name']
-    },
-    ssn: {
-      type: Number,
-      //unique: true,
-      minlength: [14, 'Not valid'],
-      maxlength: [14, 'Not valid'],
-      //required: [true, 'You must enter your SSN']
-      select: false
     },
     email: {
       type: String,
@@ -68,13 +59,6 @@ const staffSchema = new mongoose.Schema(
       type: String,
       enum: ['Doctor', 'Technician', 'Admin'],
       required: [true, 'You must specify your role']
-    },
-    passwordResetToken: { type: String },
-    passwordResetExpire: { type: Date },
-    active: {
-      type: Boolean,
-      select: false,
-      default: true
     }
   },
   {
@@ -82,6 +66,12 @@ const staffSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+staffSchema.virtual('age').get(function() {
+  return Math.trunc(
+    Math.abs(Date.now() - this.birthdate) / (1000 * 60 * 60 * 24 * 365)
+  );
+});
 
 staffSchema.pre(/^find/, function(next) {
   this.populate({
@@ -105,34 +95,8 @@ staffSchema.pre('save', function(next) {
   return next();
 });
 
-staffSchema.pre(/^find/, function() {
-  this.find({ active: { $ne: false } });
-});
-
 staffSchema.methods.correctPass = async function(candidatePass, Pass) {
   return await bcrypt.compare(candidatePass, Pass);
-};
-
-staffSchema.methods.changedPass = function(tokenDate) {
-  if (this.passwordChangedAt) {
-    const passMod = parseInt(this.passwordChangedAt.getTime() / 1000, 10); //10 for decimal
-    return passMod > tokenDate;
-  }
-  return false;
-};
-
-staffSchema.methods.createResetToken = function() {
-  const resetToken = crypto.randomBytes(32).toString('hex'); //random token
-  //console.log(resetToken);
-
-  this.passwordResetToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex'); //hashing random token, save in DB
-  //console.log({ resetToken }, this.passwordResetToken);
-  this.passwordResetExpire = Date.now() + 10 * 60 * 1000;
-
-  return resetToken;
 };
 
 const Staff = mongoose.model('Staff', staffSchema);

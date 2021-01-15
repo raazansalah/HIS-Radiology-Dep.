@@ -50,9 +50,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   if (!current) current = await Staff.findById(decoded.id);
   if (!current) return next(new AppError('Patient doesnt exist anymore', 401));
 
-  if (current.changedPass(decoded.iat))
-    return next(new AppError('Password changed', 401));
-
   req.user = current;
   next();
 });

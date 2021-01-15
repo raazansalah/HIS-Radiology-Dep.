@@ -67,7 +67,7 @@
 								<th class="column1">Name</th>
 								<th class="column2">ID</th>
 								<th class="column3">Sex</th>
-								<th class="column4">Birthdate</th>
+								<th class="column4">Age</th>
 								<th class="column5">Address</th>
 								<th class="column6">Hours Worked</th>
 								<th class="column7">Phone</th>
@@ -88,7 +88,7 @@
 									<%= doctor.sex %>
 								</td>
 								<td class="column4">
-									<%= doctor.birthdate %>
+									<%= doctor.age %>
 								</td>
 								<td class="column5">
 									<%= doctor.address %>
@@ -130,7 +130,7 @@
 											</div>
 											<div class="file-path-wrapper">
 												<input style="margin-top: 15px; height: 30px;
-											width: 300px;border-radius: 50px; " type="text" name="id" placeholder="Please Enter Patient ID"
+											width: 300px;border-radius: 50px; " type="text" name="id" placeholder="Please Enter Device ID"
 													value="<%=qs.id%>">
 											</div>
 										</div>
@@ -175,9 +175,7 @@
 									<th class="column3">ServiceDate</th>
 									<th class="column4">SubSection</th>
 									<th class="column5">ArrivalDate</th>
-
-
-
+									<th class="column6">Id</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -196,6 +194,9 @@
 									</td>
 									<td class="column5">
 										<%= device.arrivalDate %>
+									</td>
+									<td class="column6">
+										<%= device._id %>
 									</td>
 								</tr>
 								<%}%>
