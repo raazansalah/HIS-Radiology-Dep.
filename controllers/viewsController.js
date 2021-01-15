@@ -108,7 +108,7 @@ exports.postAppointment = catchAsync(async (req, res, next) => {
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
   const doctor = await Staff.findById(req.user.id);
-  const device = await Device.findById(doctor.deviceManaged);
+  const device = await Device.findById(doctor.device);
   if (!doctor) {
     //If the ID was valid, the output data will be null
     return next(new AppError('No document found with that ID', 404));
@@ -148,7 +148,7 @@ exports.getPatient = catchAsync(async (req, res, next) => {
 
 exports.getTech = catchAsync(async (req, res, next) => {
   const tech = await Staff.findById(req.user.id);
-  const device = await Device.findById(tech.deviceManaged);
+  const device = await Device.findById(tech.device);
   res.status(200).render('profileTech', { tech, device, qs: req.body });
 });
 
