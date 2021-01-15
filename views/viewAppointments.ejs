@@ -20,44 +20,50 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/appointments/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/appointments/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/appointments/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/appointments/css/flex-slider.css">
+
 	<!--===============================================================================================-->
 </head>
 
 <body>
+	<header class="header-area header-sticky">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="main-nav">
+						<!-- ***** Logo Start ***** -->
+						<a href="#" class="logo">
+                            <p class="radio">Radiology  
+                             </p>
+                            
+                        </a>
+						<!-- ***** Logo End ***** -->
+						<!-- ***** Menu Start ***** -->
+						<ul class="nav">
+							<li><a href="/appointments" class="active">Book</a></li>
+							<li><a href="/contactus">Contact Us</a></li>
+							<li><a href="/logout"> <button class="btn btn--radius-2 btn--blue" type="submit"
+										style="background-color: #c44cba;
+								border-radius: 20px;
+								font-weight: bold;
+								color: white;
+								font-family: Verdana, Geneva, Tahoma, sans-serif;">Log out </button> </a></li>
+
+						</ul>
+						<a class='menu-trigger'>
+							<span>Menu</span>
+						</a>
+						<!-- ***** Menu End ***** -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
 
 	<div class="bg-contact100" style="background-image: url('images/imageedit_6_2117734224.gif');">
 		<div class="container-contact100">
-			<header class="header-area header-sticky">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							<nav class="main-nav">
-								<!-- ***** Logo Start ***** -->
-								<a class="logo">
-									<img src="/appointments/images/logo-3.png" alt="Rad" />
-								</a>
-								<!-- ***** Logo End ***** -->
-								<!-- ***** Menu Start ***** -->
-								<ul class="nav">
-									<li><a href="/appointments" class="active">Book</a></li>
-									<li><a href="/contactus">Contact Us</a></li>
-									<li><a href="/logout"> <button class="btn btn--radius-2 btn--blue" type="submit"
-												style="background-color: #c44cba;
-										border-radius: 20px;
-										font-weight: bold;
-										color: white;
-										font-family: Verdana, Geneva, Tahoma, sans-serif;">Log out </button> </a></li>
-
-								</ul>
-								<a class='menu-trigger'>
-									<span>Menu</span>
-								</a>
-								<!-- ***** Menu End ***** -->
-							</nav>
-						</div>
-					</div>
-				</div>
-			</header>
+			
 
 			<div class="wrap-contact100">
 				<div class="contact100-pic js-tilt" data-tilt>
@@ -125,6 +131,14 @@
 			</div>
 		</div>
 	</div>
+	<script src="/appointments/js/bootstrap.min.js"></script>
+	<script src="/appointments/js/jquery.counterup.min.js"></script>
+	<script src="/appointments/js/jquery-2.1.0.min.js"></script>
+	<script src="/appointments/js/custom.min.js"></script>
+	<script src="/appointments/js/imgfix.min.js"></script>
+	<script src="/appointments/js/scrollreveal.min.js"></script>
+	<script src="/appointments/js/waypoints.min.js"></script>
+	<script src="/appointments/js/popper.js"></script>
 
 	<!--===============================================================================================-->
 	<script src="/appointments/vendor/jquery/jquery-3.2.1.min.js"></script>
