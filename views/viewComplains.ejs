@@ -78,10 +78,10 @@
 								<% complains.forEach((complain)=> { %>
 									<tr>
 										<td class="column1">
-											<%= name %>
+											<%= complain.patient.name %>
 										</td>
 										<td class="column2">
-											<%= complain.patient %>
+											<%= complain.patient.email %>
 										</td>
 										<td class="column3">
 											<%= complain.createdAt %>

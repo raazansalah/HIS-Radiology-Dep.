@@ -51,7 +51,7 @@ exports.getDevices = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllPatients = catchAsync(async (req, res) => {
-  const patient = await Patient.find();
+  const patient = await Patient.find().populate('scans');
 
   res.status(200).render('viewPatients', {
     patients: patient
@@ -74,11 +74,10 @@ exports.getAllTechnicians = catchAsync(async (req, res) => {
 
 exports.getAllComplains = catchAsync(async (req, res) => {
   const complain = await Complain.find();
-  const user = await Patient.find({ email: complain.patient });
-  console.log(complain, user);
+
+  console.log(complain);
   res.status(200).render('viewComplains', {
-    complains: complain,
-    name: user.name
+    complains: complain
   });
 });
 

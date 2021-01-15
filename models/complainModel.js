@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
 const complainSchema = new mongoose.Schema({
   complain: {
@@ -10,18 +9,18 @@ const complainSchema = new mongoose.Schema({
     default: Date.now
   },
   patient: {
-    type: String,
-    required: [true, 'A complain must have a user'],
-    validate: [validator.isEmail, 'Not a valid email']
+    type: mongoose.Schema.ObjectId,
+    ref: 'Patient',
+    required: [true, 'Scan must belong to a Patient']
   }
 });
 
-// complainSchema.pre(/^find/, function(next) {
-//   this.populate({
-//     path: 'patient'
-//   });
-//   next();
-// });
+complainSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'patient'
+  });
+  next();
+});
 
 const Complain = mongoose.model('Complain', complainSchema);
 

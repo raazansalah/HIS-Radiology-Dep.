@@ -23,7 +23,7 @@ const createSendToken = (user, status, res) => {
 };
 
 exports.getSignUp = catchAsync(async (req, res, next) => {
-  res.status(200).render('signup2', { qs: req.body });
+  res.status(200).render('signup', { qs: req.body });
 });
 
 exports.logout = catchAsync(async (req, res, next) => {
