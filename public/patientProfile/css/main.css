@@ -18,13 +18,17 @@
 	padding: 0px; 
 	box-sizing: border-box;
 }
-
+@media (min-width: 1200px){
+  .container {
+      max-width: 1269px;
+  }
+  }
 body, html {
 	height: 100%;
 	font-family: sans-serif;
 }
 .header-area {
-  position: sticky;
+  position: fixed;
   top: 30px;
   left: 0px;
   right: 0px;
@@ -212,7 +216,19 @@ body, html {
 .header-area.header-sticky .nav li a.active {
   color: #ff589e;
 }
+.center{
+  color: black;
+  font-weight: 500;
+}
+.radio{
+  align-items: center;
+  color:#c55dba;
+  font-size: larger;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0.05cm;
 
+}
 @media (max-width: 1200px) {
   .header-area .main-nav .nav li {
     padding-left: 12px;
@@ -525,8 +541,8 @@ tbody tr:hover {
   .button_cont {
     height: 80px;
     position: relative;
-    margin-top: 30px;
-    margin-left: 40%;
+    margin-top: 50px;
+    margin-left: 35%;
   }
   .button_con {
     height: 80px;
@@ -589,27 +605,40 @@ tbody tr:hover {
     top: 0;
   }
   table tbody tr td:nth-child(1):before {
-    content: "Date";
-  }
-  table tbody tr td:nth-child(2):before {
-    content: "Order ID";
-  }
-  table tbody tr td:nth-child(3):before {
     content: "Name";
   }
+  table tbody tr td:nth-child(2):before {
+    content: "SSn";
+  }
+  table tbody tr td:nth-child(3):before {
+    content: "ID";
+  }
   table tbody tr td:nth-child(4):before {
-    content: "Price";
+    content: "SEX";
   }
   table tbody tr td:nth-child(5):before {
-    content: "Quantity";
+    content: "BirthDate";
   }
   table tbody tr td:nth-child(6):before {
-    content: "Total";
+    content: "Phone";
+  }
+  table tbody tr td:nth-child(7):before {
+    content: "Email";
+  }
+  table tbody tr td:nth-child(8):before {
+    content: "Scans";
   }
 
   .column4,
   .column5,
-  .column6 {
+  .column6,
+  .column1,
+  .column2,
+  .column3,
+  .column7,
+  .column8,
+  .column9,
+  .column10{
     text-align: left;
   }
 
