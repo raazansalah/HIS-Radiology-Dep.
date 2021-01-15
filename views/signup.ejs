@@ -12,13 +12,15 @@
     <!-- Title Page-->
     <title>Sign Up</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;600&display=swap" rel="stylesheet">
 
     <!-- Icons font CSS-->
     <link href="/signup/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="/signup/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Vendor CSS-->
     <link href="/signup/vendor/select2/select2.min.css" rel="stylesheet" media="all">
@@ -34,12 +36,13 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">SIGNUP</h2>
-                    <form method="POST"  action="/signup"> 
+                    <form method="POST" action="/signup">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    
-                                    <input class="input--style-4" type="text" name="name" placeholder="First Name" value="<%=qs.name%>">
+
+                                    <input class="input--style-4" type="text" name="name" placeholder="First Name"
+                                        value="<%=qs.name%>">
                                     <span class="symbol-input100">
                                         <i class="fa fa-user " aria-hidden="true"></i>
                                     </span>
@@ -47,8 +50,9 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                   
-                                    <input class="input--style-4" type="email" name="email" placeholder="email" value="<%=qs.email%>">
+
+                                    <input class="input--style-4" type="email" name="email" placeholder="email"
+                                        value="<%=qs.email%>">
                                     <span class="symbol-input100">
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </span>
@@ -58,9 +62,10 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    
+
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthdate" placeholder="Birth Date" value="<%=qs.birthdate %>">
+                                        <input class="input--style-4 js-datepicker" type="text" name="birthdate"
+                                            placeholder="Birth Date" value="<%=qs.birthdate %>">
                                         <span class="symbol-input100">
                                             <i class="fa fa-birthday-cake " aria-hidden="true"></i>
                                         </span>
@@ -70,9 +75,10 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    
+
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="phoneNumber" placeholder="phone Number" value="<%=qs.phoneNumber%>">
+                                        <input class="input--style-4" type="text" name="phoneNumber"
+                                            placeholder="phone Number" value="<%=qs.phoneNumber%>">
                                         <span class="symbol-input100">
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                         </span>
@@ -83,8 +89,9 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    
-                                    <input class="input--style-4" type="password" name="password" placeholder="Password" value="<%=qs.password%>">
+
+                                    <input class="input--style-4" type="password" name="password" placeholder="Password"
+                                        value="<%=qs.password%>">
                                     <span class="symbol-input100">
                                         <i class="fa fa-lock" aria-hidden="true"></i>
                                     </span>
@@ -92,8 +99,9 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                
-                                    <input class="input--style-4" type="password" name="passwordConfirm" placeholder="Confirm Password" value="<%=qs.passwordConfirm%>">
+
+                                    <input class="input--style-4" type="password" name="passwordConfirm"
+                                        placeholder="Confirm Password" value="<%=qs.passwordConfirm%>">
                                     <span class="symbol-input100">
                                         <i class="fa fa-lock" aria-hidden="true"></i>
                                     </span>
@@ -103,18 +111,18 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    
+
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="sex">
-                                            <option disabled="disabled" selected="selected" value="<%=qs.sex%>">Your Gender</option>
+                                            <option disabled="disabled" selected="selected" value="<%=qs.sex%>">Your
+                                                Gender</option>
                                             <% var options=["Male","Female"]; %>
-                                            <% for (var i=0;i<2;i++) { %>
+                                                <% for (var i=0;i<2;i++) { %>
+                                                    <option value="<%= options[i] %>">
+                                                        <%=options[i] %>
+                                                    </option>
+                                                    <% } %>
 
-                                                <option value="<%= options[i] %>">
-                                                    <%=options[i] %>
-                                                </option>
-                                                <% } %>
-                                         
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
@@ -122,24 +130,24 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                
+
                                     <div class="rs-select2 js-select-simple select--no-search">
                                         <select name="role">
-                                            <option disabled="disabled" selected="selected" value="<%=qs.role%>">Your Title</option>
+                                            <option disabled="disabled" selected="selected" value="<%=qs.role%>">Your
+                                                Title</option>
                                             <% var options=["Doctor","Patient","Technician"]; %>
-                                            <% for (var i=0;i<3;i++) { %>
-
-                                                <option value="<%= options[i] %>">
-                                                    <%=options[i] %>
-                                                </option>
-                                                <% } %>
+                                                <% for (var i=0;i<3;i++) { %>
+                                                    <option value="<%= options[i] %>">
+                                                        <%=options[i] %>
+                                                    </option>
+                                                    <% } %>
                                         </select>
                                         <div class="select-dropdown"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue" type="submit">sign up</button>
                         </div>
@@ -153,7 +161,7 @@
     <script src="/signup/vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
     <script src="/signup/vendor/select2/select2.min.js"></script>
-    <script src="s/ignup/vendor/datepicker/moment.min.js"></script>
+    <script src="/signup/vendor/datepicker/moment.min.js"></script>
     <script src="/signup/vendor/datepicker/daterangepicker.js"></script>
 
     <!-- Main JS-->

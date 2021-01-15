@@ -74,12 +74,11 @@ exports.getAllTechnicians = catchAsync(async (req, res) => {
 
 exports.getAllComplains = catchAsync(async (req, res) => {
   const complain = await Complain.find();
-  const user = await Patient.find({ email: complain.patient }).select('name');
-
+  const user = await Patient.find({ email: complain.patient });
+  console.log(complain, user);
   res.status(200).render('viewComplains', {
     complains: complain,
-    name: user.name,
-    email: complain.patient
+    name: user.name
   });
 });
 

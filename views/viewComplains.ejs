@@ -32,14 +32,18 @@
 						<div class="col-12">
 							<nav class="main-nav">
 								<!-- ***** Logo Start ***** -->
-								<a href="#" class="logo">
+								<a class="logo">
 									<img src="/complains/images/logo-3.png" alt="Rad" />
 								</a>
 								<!-- ***** Logo End ***** -->
 								<!-- ***** Menu Start ***** -->
 								<ul class="nav">
-									<li><a href="/home">Home</a></li>
-									<li><a href="/contactus" class="active">Contact Us</a></li>
+									<li><a href="/patients">Patients</a></li>
+									<li><a href="/doctors">Doctors</a></li>
+									<li><a href="/techs">Technicians</a></li>
+									<li><a href="/devices">Devices</a></li>
+									<li><a href="/dashboard">Dashboard</a></li>
+									<li><a href="/complains" class="active">Complains</a></li>
 									<li><a class="btn btn--radius-2 btn--blue" href="/logout" style="background-color: #c44cba;
 										border-radius: 20px;
 										font-weight: bold;
@@ -71,19 +75,19 @@
 								</tr>
 							</thead>
 							<tbody>
-								<% complains.forEach(()=> { %>
+								<% complains.forEach((complain)=> { %>
 									<tr>
 										<td class="column1">
 											<%= name %>
 										</td>
 										<td class="column2">
-											<%= email %>
+											<%= complain.patient %>
 										</td>
 										<td class="column3">
-											<%= complains.createdAt %>
+											<%= complain.createdAt %>
 										</td>
 										<td class="column4">
-											<%= complains.complain %>
+											<%= complain.complain %>
 										</td>
 
 									</tr>
