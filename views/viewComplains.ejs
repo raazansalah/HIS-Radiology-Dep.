@@ -20,47 +20,52 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/complains/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/complains/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/complains/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/complains/css/flex-slider.css">
 	<!--===============================================================================================-->
 </head>
 
 <body>
+	<header class="header-area header-sticky">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="main-nav">
+						<!-- ***** Logo Start ***** -->
+						<a href="#" class="logo">
+                            <p class="radio">Radiology  
+                             </p>
+                            
+                        </a>
+						<!-- ***** Logo End ***** -->
+						<!-- ***** Menu Start ***** -->
+						<ul class="nav">
+							<li><a href="/patients">Patients</a></li>
+							<li><a href="/doctors">Doctors</a></li>
+							<li><a href="/techs">Technicians</a></li>
+							<li><a href="/devices">Devices</a></li>
+							<li><a href="/dashboard">Dashboard</a></li>
+							<li><a href="/complains" class="active">Complains</a></li>
+							<li><a href="/logout"> <button class="btn btn--radius-2 btn--blue" href="/logout"
+										style="background-color: #c44cba;
+								border-radius: 20px;
+								font-weight: bold;
+								color: white;
+								font-family: Verdana, Geneva, Tahoma, sans-serif;">Log out</button> </a> </li>
+
+						</ul>
+						<a class='menu-trigger'>
+							<span>Menu</span>
+						</a>
+						<!-- ***** Menu End ***** -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
 	<div class="limiter">
 		<div class="container-table100">
-			<header class="header-area header-sticky">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							<nav class="main-nav">
-								<!-- ***** Logo Start ***** -->
-								<a class="logo">
-									<img src="/complains/images/logo-3.png" alt="Rad" />
-								</a>
-								<!-- ***** Logo End ***** -->
-								<!-- ***** Menu Start ***** -->
-								<ul class="nav">
-									<li><a href="/patients">Patients</a></li>
-									<li><a href="/doctors">Doctors</a></li>
-									<li><a href="/techs">Technicians</a></li>
-									<li><a href="/devices">Devices</a></li>
-									<li><a href="/dashboard">Dashboard</a></li>
-									<li><a href="/complains" class="active">Complains</a></li>
-									<li><a href="/logout"> <button class="btn btn--radius-2 btn--blue" href="/logout"
-												style="background-color: #c44cba;
-										border-radius: 20px;
-										font-weight: bold;
-										color: white;
-										font-family: Verdana, Geneva, Tahoma, sans-serif;">Log out</button> </a> </li>
-
-								</ul>
-								<a class='menu-trigger'>
-									<span>Menu</span>
-								</a>
-								<!-- ***** Menu End ***** -->
-							</nav>
-						</div>
-					</div>
-				</div>
-			</header>
+			
 			<div class="wrap-table100">
 				<div class="table100">
 					<% if (complains.length> 0) { %>
@@ -89,11 +94,7 @@
 
 									</tr>
 									<% }) %>
-										<div class="button_con">
-											<button class="example_b" onclick="btnClicked1()" target="_blank"
-												rel="nofollow noopener">Delete</button>
 
-										</div>
 
 										<% } else { %>
 											<p class="noDoc"> There is no complains to show</p>
@@ -105,6 +106,26 @@
 			</div>
 		</div>
 	</div>
+	<footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <ul class="social">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="copyright">Copyright &copy; 2021 team-10 Database</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 	<script>
 
 		function btnClicked1() {
@@ -112,6 +133,14 @@
 		}
 
 	</script>
+	<script src="/complains/js/bootstrap.min.js"></script>
+	<script src="/complains/js/jquery.counterup.min.js"></script>
+	<script src="/complains/js/jquery-2.1.0.min.js"></script>
+	<script src="/complains/js/custom.min.js"></script>
+	<script src="/complains/js/imgfix.min.js"></script>
+	<script src="/complains/js/scrollreveal.min.js"></script>
+	<script src="/complains/js/waypoints.min.js"></script>
+	<script src="/complains/js/popper.js"></script>
 
 	<!--===============================================================================================-->
 	<script src="/complains/vendor/jquery/jquery-3.2.1.min.js"></script>
