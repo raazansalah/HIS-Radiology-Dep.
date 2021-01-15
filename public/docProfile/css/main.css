@@ -13,6 +13,9 @@
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
+.file-path-wrapper {
+  margin-left: 10px;
+}
 * {
 	margin: 0px; 
 	padding: 0px; 
