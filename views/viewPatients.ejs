@@ -32,7 +32,7 @@
 						<div class="col-12">
 							<nav class="main-nav">
 								<!-- ***** Logo Start ***** -->
-								<a href="#" class="logo">
+								<a class="logo">
 									<img src="/patients/images/logo-3.png" alt="Rad" />
 								</a>
 								<!-- ***** Logo End ***** -->
@@ -43,6 +43,7 @@
 									<li><a href="/techs">Technicians</a></li>
 									<li><a href="/devices">Devices</a></li>
 									<li><a href="/dashboard">Dashboard</a></li>
+									<li><a href="/complains">Complains</a></li>
 									<li><a class="btn btn--radius-2 btn--blue" href="/logout" style="background-color: #c44cba;
 										border-radius: 20px;
 										font-weight: bold;
@@ -65,16 +66,15 @@
 							<thead>
 								<tr class="table100-head">
 									<th class="column1">Name</th>
-									<th class="column2">SSN</th>
-									<th class="column3">ID</th>
-									<th class="column4">Sex</th>
-									<th class="column5">Birthdate</th>
+									<th class="column2">ID</th>
+									<th class="column3">Sex</th>
+									<th class="column4">Birthdate</th>
 
-									<th class="column7">Phone</th>
+									<th class="column5">Phone</th>
 
-									<th class="column9">Email</th>
+									<th class="column6">Email</th>
 									<!--<th class="column10">Password</th>-->
-									<th class="column10">Scans</th>
+									<th class="column7">Scans</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -84,29 +84,25 @@
 											<%= Patient.name %>
 										</td>
 										<td class="column2">
-											<%= Patient.ssn %>
-										</td>
-										<td class="column3">
 											<%= Patient._id %>
 										</td>
-										<td class="column4">
+										<td class="column3">
 											<%= Patient.sex %>
 										</td>
-										<td class="column5">
+										<td class="column4">
 											<%= Patient.birthdate %>
 										</td>
 
-										<td class="column7">
+										<td class="column5">
 											<%= Patient.phoneNumber %>
 										</td>
 
-										<td class="column9">
+										<td class="column6">
 											<%= Patient.email %>
 										</td>
 									</tr>
 									<% }) %>
-										<div class="button_cont"> <button class="example_b" onclick="btnClicked()"
-												target="_blank" rel="nofollow noopener">Add</button>
+										<div class="button_con">
 											<button class="example_b" onclick="btnClicked1()" target="_blank"
 												rel="nofollow noopener">Delete</button>
 										</div>
