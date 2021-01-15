@@ -35,13 +35,17 @@
 	padding: 0px; 
 	box-sizing: border-box;
 }
-
+@media (min-width: 1200px){
+  .container {
+      max-width: 1269px;
+  }
+  }
 body, html {
 	height: 100%;
 	font-family: Montserrat-Regular, sans-serif;
 }
 .header-area {
-  position:static;
+  position:fixed;
   top: 30px;
   left: 0px;
   right: 0px;
@@ -239,7 +243,19 @@ body, html {
     display: none;
   }
 }
+.center{
+  color: black;
+  font-weight: 500;
+}
+.radio{
+  align-items: center;
+  color:#c55dba;
+  font-size: larger;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0.05cm;
 
+}
 @media (max-width: 991px) {
   .header-area {
     padding: 0px 15px;
