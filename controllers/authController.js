@@ -1,11 +1,9 @@
-const crypto = require('crypto');
 const { promisify } = require('util');
 const JWT = require('jsonwebtoken');
 const Staff = require('./../models/staffModel');
 const Patient = require('./../models/patientModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
-const sendEmail = require('./../utils/email');
 
 const signInToken = id => {
   return JWT.sign({ id }, process.env.JWT_SECRET, {
@@ -15,74 +13,59 @@ const signInToken = id => {
 
 const createSendToken = (user, status, res) => {
   const token = signInToken(user.id);
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true
-  };
+  // const cookieOptions = {
+  //   expires: new Date(
+  //     Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+  //   ),
+  //   httpOnly: true
+  // };
 
-  res.cookie('jwt', token, cookieOptions);
+  res.cookie('jwt', token, { httpOnly: true });
   user.password = undefined;
-  res.status(status).json({
-    status: 'success',
-    token,
-    data: {
-      user
-    }
-  });
+  if (user.role === 'Doctor') res.redirect('/getDoctor');
+  if (user.role === 'Patient') res.redirect('/getPatient');
+  if (user.role === 'Technician') res.redirect('/getTech');
+  res.redirect('/adminHome');
 };
 
-exports.signup = catchAsync(async (req, res, next) => {
-  //const newPatient = await Patient.create(req.body); //Anyone can specify his/her role as admin. So, we should specify the data saved
-  // const newPatient = await Patient.create(req.body);
-  //Now we can specify admins in the database ourselves
-
-  const newStaff = await Staff.create(req.body);
-  //To make him login instantly, we'll send him a token
-  createSendToken(newStaff, 201, res);
+exports.getSignUp = catchAsync(async (req, res, next) => {
+  res.status(200).render('signup', { qs: req.body });
 });
 
-exports.login = catchAsync(async (req, res, next) => {
-  const { email, password } = req.body; //Object deconstructing
+exports.logout = catchAsync(async (req, res, next) => {
+  res.cookie('jwt', ' ', { maxAge: 0 });
+  res.redirect('/home');
+});
 
-  //check if email and password exist
-  if (!email || !password)
-    return next(new AppError('Please enter email and password', 400));
-
-  //check if user exist and password is correct
-  const user = await Patient.findOne({ email }).select('+password');
-  if (!user || !(await user.correctPass(password, user.password)))
-    //Order is important here for .compare
-    return next(new AppError('Invalid email or password', 400));
-
-  //send a token
-  createSendToken(user, 200, res);
+exports.postSignUp = catchAsync(async (req, res, next) => {
+  let newUser;
+  if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
+  else newUser = await Staff.create(req.body);
+  //To make him login instantly, we'll send him a token
+  createSendToken(newUser, 201, res);
+  //res.status(200).render('signup', { qs: req.body });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
   //Getting the token from the header
+  const { cookies } = req;
   let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  )
-    token = req.headers.authorization.split(' ')[1]; //Bearer 21324ywdh728y4ufihewe24twtw3
+  if (cookies.jwt) token = cookies.jwt; //Bearer 21324ywdh728y4ufihewe24twtw3
   if (!token) return next(new AppError('You are not logged in', 401));
 
   //Verify the token
   const decoded = await promisify(JWT.verify)(token, process.env.JWT_SECRET);
 
   //Check if the user still exists
-  const currentPatient = await Patient.findById(decoded.id);
-  if (!currentPatient)
-    return next(new AppError('Patient doesnt exist anymore', 401));
+  let current = await Patient.findById(decoded.id);
+  if (!current) current = await Staff.findById(decoded.id);
+  if (!current) return next(new AppError('Patient doesnt exist anymore', 401));
 
   //Check that password didn't change
-  if (currentPatient.changedPass(decoded.iat))
+  if (current.changedPass(decoded.iat))
     return next(new AppError('Password changed', 401));
 
-  req.user = currentPatient;
+  req.user = current;
   next();
 });
 
@@ -97,76 +80,29 @@ exports.restrictTo = (...roles) => {
   };
 };
 
-exports.forgotpass = catchAsync(async (req, res, next) => {
-  //Find the user
-  const user = await Patient.findOne({ email: req.body.email });
-  if (!user) return next(new AppError('Cant find user', 404));
-
-  //Set him a reset token and save a hashed one for it in his data
-  const resetToken = user.createResetToken();
-  await user.save({ validateBeforeSave: false });
-
-  //Send him the reset token
-  const resetURl = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/users/resetpass/${resetToken}`;
-  const message = `Forgot ur pass? submit a PATCH request with ur new pass and passConfirm to:${resetURl}`;
-
-  try {
-    await sendEmail({
-      email: user.email,
-      subject: 'password reset token',
-      message
-    });
-
-    res.status(200).json({
-      status: 'success',
-      message: 'email was sent'
-    });
-  } catch (err) {
-    //undo what we did because of the error
-    user.passwordResetToken = undefined;
-    user.passwordResetExpire = undefined;
-    await user.save({ validateBeforeSave: false });
-    //console.log(err);
-    return next(new AppError('An error happened', 500));
-  }
+exports.getLogin = catchAsync(async (req, res, next) => {
+  res.status(200).render('login', { qs: req.body });
+});
+exports.getadminLogin = catchAsync(async (req, res, next) => {
+  res.status(200).render('adminLogin', { qs: req.body });
 });
 
-exports.resetpass = catchAsync(async (req, res, next) => {
-  //Hash the token sent in the parameter like what we did for the one saved in the database and then compare them
-  const hashToken = crypto
-    .createHash('sha256')
-    .update(req.params.token)
-    .digest('hex');
-  const user = await Patient.findOne({
-    passwordResetToken: hashToken,
-    passwordResetExpire: { $gt: Date.now() }
-  });
-  if (!user) return next(new AppError('The token is invalid or expired', 400));
+exports.postLogin = catchAsync(async (req, res, next) => {
+  const { email, password, role } = req.body; //Object deconstructing
 
-  //allow to change the password from the body
-  user.password = req.body.password;
-  user.passwordConfirm = req.body.passwordConfirm;
-  user.passwordResetToken = undefined;
-  user.passwordResetExpire = undefined;
-  await user.save();
+  //check if email and password exist
+  if (!email || !password)
+    return next(new AppError('Please enter email and password', 400));
 
-  //log the user in
-  createSendToken(user, 200, res);
-});
+  //check if user exist and password is correct
+  let user;
+  if (role === 'Patient')
+    user = await Patient.findOne({ email }).select('+password');
+  else user = await Staff.findOne({ email }).select('+password');
+  if (!user || !(await user.correctPass(password, user.password)))
+    //Order is important here for .compare
+    return next(new AppError('Invalid email or password', 400));
 
-exports.updatePassword = catchAsync(async (req, res, next) => {
-  //get the user and check the password
-  const user = await Patient.findById(req.user.id).select('+password');
-  if (!(await user.correctPass(req.body.oldPassword, user.password)))
-    return next(new AppError('Patient not found', 401));
-
-  //Update password
-  user.password = req.body.password;
-  user.passwordConfirm = req.body.passwordConfirm;
-  await user.save();
-
-  // //log the user in
+  //send a token
   createSendToken(user, 200, res);
 });

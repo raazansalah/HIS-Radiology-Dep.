@@ -1,24 +1,20 @@
-//const mongoose = require('mongoose');
 const path = require('path');
-const multer = require('multer');
-const JWT = require('jsonwebtoken');
-const { promisify } = require('util');
 const AppError = require('./../utils/appError');
-const factory = require('./handleController');
 const Device = require('../models/deviceModel');
 const Appointment = require('../models/appointmentModel');
 const Staff = require('../models/staffModel');
 const Patient = require('../models/patientModel');
 const Complain = require('../models/complainModel');
-const Scan = require('../models/scanModel');
 const catchAsync = require('../utils/catchAsync');
 const GoogleCalendar = require('../calendar');
-const APIFeatures = require('../utils/apifeatures');
 
 exports.getHome = catchAsync(async (req, res, next) => {
   res.status(200).render('home');
 });
 
+exports.getadminHome = catchAsync(async (req, res, next) => {
+  res.status(200).render('adminHome');
+});
 exports.getDashboard = catchAsync(async (req, res, next) => {
   const devices = await Device.find();
   const patients = await Patient.find();
@@ -55,63 +51,24 @@ exports.getDevices = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllPatients = catchAsync(async (req, res) => {
-  const features = new APIFeatures(Patient.find(), req.query)
-    //.find({duration: 5, difficulty: 'easy'})
-    //.find().where('duration').equals("5")
-    //find is like SELECT in SQL, returns an array of objects
-    .filter()
-    .sort()
-    .limitFields()
-    .pagination();
-
-  //const docs = await features.query.explain();
-  const patient = await features.query;
+  const patient = await Patient.find();
 
   //SEND RESPONSE
   res.status(200).render('viewPatients', {
     patients: patient
   });
-  // res.status(200).json({
-  //   patients: patient
-  // });
 });
 
 exports.getAllDoctors = catchAsync(async (req, res) => {
-  // const features = new APIFeatures(Staff.find({ role: 'Doctor' }), req.query)
-  //   //.find({duration: 5, difficulty: 'easy'})
-  //   //.find().where('duration').equals("5")
-  //   //find is like SELECT in SQL, returns an array of objects
-  //   .filter()
-  //   .sort()
-  //   .limitFields()
-  //   .pagination();
-
-  //const docs = await features.query.explain();
   const doctor = await Staff.find({ role: 'Doctor' });
-  console.log(doctor);
+  //console.log(doctor);
 
   //SEND RESPONSE
   res.status(200).render('viewDoctors', {
     doctors: doctor
   });
-  // res.status(200).json({
-  //   staffs: doctor
-  // });
 });
 exports.getAllTechnicians = catchAsync(async (req, res) => {
-  // const features = new APIFeatures(
-  //   Staff.find({ role: 'Technician' }),
-  //   req.query
-  // )
-  //   //.find({duration: 5, difficulty: 'easy'})
-  //   //.find().where('duration').equals("5")
-  //   //find is like SELECT in SQL, returns an array of objects
-  //   .filter()
-  //   .sort()
-  //   .limitFields()
-  //   .pagination();
-
-  //const docs = await features.query.explain();
   const technician = await Staff.find({ role: 'Technician' });
 
   //SEND RESPONSE
@@ -121,28 +78,15 @@ exports.getAllTechnicians = catchAsync(async (req, res) => {
 });
 
 exports.getAllComplains = catchAsync(async (req, res) => {
-  const features = new APIFeatures(Complain.find(), req.query)
-    //.find({duration: 5, difficulty: 'easy'})
-    //.find().where('duration').equals("5")
-    //find is like SELECT in SQL, returns an array of objects
-    .filter()
-    .sort()
-    .limitFields()
-    .pagination();
-
-  //const docs = await features.query.explain();
-  const complain = await features.query;
+  const complain = await Complain.find();
   const user = await Patient.find({ email: complain.patient }).select('name');
-  //console.log(complain, user.name);
+
   //SEND RESPONSE
   res.status(200).render('viewComplains', {
     complains: complain,
     name: user.name,
     email: complain.patient
   });
-  // res.status(200).json({
-  //   patients: patient
-  // });
 });
 
 exports.getAppointment = catchAsync(async (req, res, next) => {
@@ -208,127 +152,13 @@ exports.getTech = catchAsync(async (req, res, next) => {
   res.status(200).render('profileTech', { tech, device, qs: req.body });
 });
 
-//=================================================================AUTH
-const signInToken = id => {
-  return JWT.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES
+exports.addDevice = catchAsync(async (req, res, next) => {
+  //try {
+  const newDoc = await Device.create(req.body); //.create returns a promise
+  res.status(201).json({
+    status: 'success',
+    data: {
+      newDoc
+    }
   });
-};
-
-const createSendToken = (user, status, res) => {
-  const token = signInToken(user.id);
-  // const cookieOptions = {
-  //   expires: new Date(
-  //     Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
-  //   ),
-  //   httpOnly: true
-  // };
-
-  res.cookie('jwt', token, { httpOnly: true });
-  user.password = undefined;
-  if (user.role === 'Doctor') res.redirect('/getDoctor');
-  if (user.role === 'Patient') res.redirect('/getPatient');
-  if (user.role === 'Technician') res.redirect('/getTech');
-  if (user.role === 'Admin') res.redirect('/dashboard');
-};
-
-exports.getSignUp = catchAsync(async (req, res, next) => {
-  res.status(200).render('signup', { qs: req.body });
 });
-
-exports.postSignUp = catchAsync(async (req, res, next) => {
-  let newUser;
-  if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
-  else newUser = await Staff.create(req.body);
-  //To make him login instantly, we'll send him a token
-  createSendToken(newUser, 201, res);
-  //res.status(200).render('signup', { qs: req.body });
-});
-
-exports.protect = catchAsync(async (req, res, next) => {
-  //Getting the token from the header
-  const { cookies } = req;
-  let token;
-  if (cookies.jwt) token = cookies.jwt; //Bearer 21324ywdh728y4ufihewe24twtw3
-  if (!token) return next(new AppError('You are not logged in', 401));
-
-  //Verify the token
-  const decoded = await promisify(JWT.verify)(token, process.env.JWT_SECRET);
-
-  //Check if the user still exists
-  let current = await Patient.findById(decoded.id);
-  if (!current) current = await Staff.findById(decoded.id);
-  if (!current) return next(new AppError('Patient doesnt exist anymore', 401));
-
-  //Check that password didn't change
-  if (current.changedPass(decoded.iat))
-    return next(new AppError('Password changed', 401));
-
-  req.user = current;
-  next();
-});
-
-exports.restrictTo = (...roles) => {
-  //we can't add parameters to middleware so we wrapped the function in another
-  return (req, res, next) => {
-    if (!roles.includes(req.user.role))
-      return next(
-        new AppError('You are not allowed to access this route', 403)
-      );
-    next();
-  };
-};
-
-exports.getLogin = catchAsync(async (req, res, next) => {
-  res.status(200).render('login', { qs: req.body });
-});
-
-exports.postLogin = catchAsync(async (req, res, next) => {
-  const { email, password, role } = req.body; //Object deconstructing
-
-  //check if email and password exist
-  if (!email || !password)
-    return next(new AppError('Please enter email and password', 400));
-
-  //check if user exist and password is correct
-  let user;
-  if (role === 'Patient')
-    user = await Patient.findOne({ email }).select('+password');
-  else user = await Staff.findOne({ email }).select('+password');
-  if (!user || !(await user.correctPass(password, user.password)))
-    //Order is important here for .compare
-    return next(new AppError('Invalid email or password', 400));
-
-  //send a token
-  createSendToken(user, 200, res);
-});
-//=================================================================AUTH
-
-// ======================================UPLOADS
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/uploads');
-  },
-  filename: (req, file, cb) => {
-    const ext = file.mimetype.split('/')[1];
-    cb(null, `patient-${req.user.id}-${Date.now()}.${ext}`);
-  }
-});
-
-const upload = multer({
-  storage: multerStorage
-});
-
-exports.uploadFile = upload.single('myImage');
-exports.userRedirect = catchAsync(async (req, res, next) => {
-  await Scan.create({
-    patient: req.body.id,
-    device: req.user.deviceManaged,
-    file: req.file.filename
-  });
-  if (req.user.role === 'Doctor') res.redirect('/getDoctor');
-  if (req.user.role === 'Technician') res.redirect('/getTech');
-});
-// ======================================UPLOADS
-
-exports.addDevice = factory.createOne(Device);

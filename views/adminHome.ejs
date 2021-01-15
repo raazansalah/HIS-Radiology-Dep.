@@ -9,18 +9,15 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
 
-    <title>Dashboard</title>
-    <!--
-SOFTY PINKO
-https://templatemo.com/tm-535-softy-pinko
--->
+    <title>Radiology Department</title>
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="/dashboard/css/bootstrap.min.css">
 
-    <link rel="stylesheet" type="text/css" href="/dashboard/css/font-awesome.css">
 
-    <link rel="stylesheet" href="/dashboard/css/templatemo-softy-pinko.css">
+    <link rel="stylesheet" type="text/css" href="/home/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/home/css/font-awesome.css">
+
+    <link rel="stylesheet" href="/home/css/templatemo-softy-pinko.css">
 
 </head>
 
@@ -45,16 +42,17 @@ https://templatemo.com/tm-535-softy-pinko
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="#" class="logo">
-                            <img src="/dashboard/images/logo.png" alt="Softy Pinko" />
+                            <img src="/home/images/logo-3.png" alt="Rad" />
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="/doctors">Doctors</a></li>
                             <li><a href="/patients">Patients</a></li>
+                            <li><a href="/doctors">Doctors</a></li>
                             <li><a href="/techs">Technicians</a></li>
                             <li><a href="/devices">Devices</a></li>
-                            <li><a href="/dashboard" class="active">Dashboard</a></li>
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/complains">Complains</a></li>
                             <li><a class="btn btn--radius-2 btn--blue" href="/logout" style="background-color: #c44cba;
 								border-radius: 20px;
 								font-weight: bold;
@@ -72,85 +70,74 @@ https://templatemo.com/tm-535-softy-pinko
     </header>
     <!-- ***** Header Area End ***** -->
 
-    <!-- ***** Welcome Area Start ***** -->
+    <!-- ** Welcome Area Start ** -->
     <div class="welcome-area" id="welcome">
 
-
+        <!-- ** Header Text Start ** -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
+                        <h1>We provide the best <strong>Medical Care</strong><br></h1>
+                        <p>The results you can trust with 100% accuracy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ** Header Text End ** -->
     </div>
-    <!-- ***** Welcome Area End ***** -->
-
-    <!-- ***** Features Small Start ***** -->
-    <section class="section home-feature">
+    <!-- ** Welcome Area End ** -->
+    <!-- ** Features Small Start ** -->
+    <section class="section home-feature" id="features">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <!-- ***** Features Small Item Start ***** -->
+                        <!-- ** Features Small Item Start ** -->
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12"
                             data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
                             <div class="features-small-item">
                                 <div class="icon">
-                                    <i class="fa fa-user-md fa-5x"></i>
+                                    <i><img src="/home/images/img-02.jpeg" alt=""></i>
                                 </div>
-                                <h5 class="features-title">Doctors</h5>
-                                <p>
-                                    <%= doctors %> Doctor
-                                </p>
+                                <h5 class="features-title">Long History of Success</h5>
+                                <p>since 1985</p>
                             </div>
                         </div>
-                        <!-- ***** Features Small Item End ***** -->
+                        <!-- ** Features Small Item End ** -->
 
-                        <!-- ***** Features Small Item Start ***** -->
+                        <!-- ** Features Small Item Start ** -->
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12"
                             data-scroll-reveal="enter bottom move 50px over 0.6s after 0.4s">
                             <div class="features-small-item">
                                 <div class="icon">
-                                    <i class="fa  fa-users fa-5x"></i>
+                                    <i><img src="/home/images/img-03.jpeg" alt=""></i>
                                 </div>
-                                <h5 class="features-title">Patients</h5>
-                                <p>
-                                    <%= patients %> Patient
-                                </p>
+                                <h5 class="features-title">Advanced Technologies</h5>
+                                <p>and techniques</p>
                             </div>
                         </div>
-                        <!-- ***** Features Small Item End ***** -->
+                        <!-- ** Features Small Item End ** -->
 
-
-                        <!-- ***** Features Small Item Start ***** -->
+                        <!-- ** Features Small Item Start ** -->
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12"
                             data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
                             <div class="features-small-item">
                                 <div class="icon">
-                                    <i class="fa fa-medkit" aria-hidden="true"></i>
+                                    <i><img src="/home/images/img-01.jpeg" alt=""></i>
                                 </div>
-                                <h5 class="features-title">Medical Devices</h5>
-                                <p>
-                                    <%= devices%> Device
-                                </p>
+                                <h5 class="features-title">Experienced Doctors</h5>
+                                <p>and staff</p>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12"
-                            data-scroll-reveal="enter bottom move 50px over 0.6s after 0.6s">
-                            <div class="features-small-item">
-                                <div class="icon">
-                                    <i class="fa fa-cogs" aria-hidden="true"></i>
-                                </div>
-                                <h5 class="features-title">Technicians</h5>
-                                <p>
-                                    <%= techs%> Technicians
-                                </p>
-                            </div>
-                        </div>
-                        <!-- ***** Features Small Item End ***** -->
+                        <!-- ** Features Small Item End ** -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ***** Features Small End ***** -->
-
-
-    <!-- ***** Footer Start ***** -->
+    <!-- ** Features Small End ** -->
+    <!-- ** Footer Start ** -->
     <footer>
         <div class="container">
             <div class="row">
@@ -166,27 +153,27 @@ https://templatemo.com/tm-535-softy-pinko
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="copyright">Copyright &copy; 2020 Softy Pinko Company - Design: TemplateMo</p>
+                    <p class="copyright">Copyright &copy; 2021 Agmad team Database</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- jQuery -->
-    <script src="/dashboard/js/jquery-2.1.0.min.js"></script>
+    <script src="/home/js/jquery-2.1.0.min.js"></script>
 
     <!-- Bootstrap -->
-    <script src="/dashboard/js/popper.js"></script>
-    <script src="/dashboard/js/bootstrap.min.js"></script>
+    <script src="/home/js/popper.js"></script>
+    <script src="/home/js/bootstrap.min.js"></script>
 
     <!-- Plugins -->
-    <script src="/dashboard/js/scrollreveal.min.js"></script>
-    <script src="/dashboard/js/waypoints.min.js"></script>
-    <script src="/dashboard/js/jquery.counterup.min.js"></script>
-    <script src="/dashboard/js/imgfix.min.js"></script>
+    <script src="/home/js/scrollreveal.min.js"></script>
+    <script src="/home/js/waypoints.min.js"></script>
+    <script src="/home/js/jquery.counterup.min.js"></script>
+    <script src="/home/js/imgfix.min.js"></script>
 
     <!-- Global Init -->
-    <script src="/dashboard/js/custom.js"></script>
+    <script src="/home/js/custom.js"></script>
 
 </body>
 

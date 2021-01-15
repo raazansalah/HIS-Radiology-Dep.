@@ -34,20 +34,18 @@
 						<!-- ***** Logo Start ***** -->
 						<a href="#" class="logo">
 							<p class="radio">Radiology </p>
-						</p>
-							
+							</p>
+
 						</a>
 						<!-- ***** Logo End ***** -->
 						<!-- ***** Menu Start ***** -->
 						<ul class="nav">
-							<li><a href="/techProfile/views/home.ejs">Home</a></li>
-							<li><a href="/techProfile/views/viewPatient.ejs">SignUp</a></li>
-							<li><a href="/techProfile/views/viewDoc.ejs">Login</a></li>
-							<li><button class="btn btn--radius-2 btn--blue"  type="submit" style="background-color: #c44cba;
+							<li><a href="/home">Home</a></li>
+							<li><a class="btn btn--radius-2 btn--blue" href="/logout" style="background-color: #c44cba;
 								border-radius: 20px;
 								font-weight: bold;
 								color: white;
-								font-family: Verdana, Geneva, Tahoma, sans-serif;">logout</button></li>
+								font-family: Verdana, Geneva, Tahoma, sans-serif;">logout </a> </li>
 
 						</ul>
 						<a class='menu-trigger'>
@@ -61,7 +59,7 @@
 	</header>
 	<div class="limiter">
 		<div class="container-table100">
-			
+
 			<div class="wrap-table100">
 				<div class="table100">
 					<table>
@@ -135,8 +133,8 @@
 										</div>
 										<div class="file-path-wrapper">
 											<input style="margin-top: 15px; height: 30px;
-											width: 300px;border-radius: 50px;margin-left: 10px; " type="text" name="id" 
-											placeholder="Please Enter Patient ID" value="<%=qs.id%>">
+											width: 300px;border-radius: 50px;margin-left: 10px; " type="text" name="id"
+												placeholder="Please Enter Patient ID" value="<%=qs.id%>">
 										</div>
 									</div>
 									<button type="submit" class="btn" style="color: #fff !important;
