@@ -15,8 +15,7 @@ const deviceSchema = new mongoose.Schema(
       minlength: [3, 'A device name must have more or equal then 10 characters']
     },
     subSection: String,
-    arrivalDate: { type: Date, default: Date.now },
-    serviceDate: { type: Date, default: Date.now }
+    arrivalDate: String
   },
   {
     toJSON: { virtuals: true },

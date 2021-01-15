@@ -33,6 +33,9 @@ exports.logout = catchAsync(async (req, res, next) => {
 
 exports.postSignUp = catchAsync(async (req, res, next) => {
   let newUser;
+  const dateF = req.body.birthdate.split('/');
+  const dateS = new Date(`${dateF[1]}-${dateF[0]}-${dateF[2]}`);
+  req.body.birthdate = dateS;
   if (req.body.role === 'Patient') newUser = await Patient.create(req.body);
   else newUser = await Staff.create(req.body);
   createSendToken(newUser, 201, res);

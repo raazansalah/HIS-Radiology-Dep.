@@ -18,6 +18,7 @@ const upload = multer({
 
 exports.uploadFile = upload.single('myImage');
 exports.userRedirect = catchAsync(async (req, res, next) => {
+  console.log(req.user);
   await Scan.create({
     patient: req.body.id,
     device: req.user.device,

@@ -4,7 +4,7 @@ const appointmentSchema = new mongoose.Schema({
   patient: {
     type: mongoose.Schema.ObjectId,
     ref: 'Patient'
-    // required: [true, 'Appointment must belong to a Patient']
+    //required: [true, 'Appointment must belong to a Patient']
   },
   device: {
     type: mongoose.Schema.ObjectId,
@@ -14,7 +14,7 @@ const appointmentSchema = new mongoose.Schema({
   scanType: String,
   patientName: String,
   patientMail: String,
-  addmissionDate: Date,
+  addmissionDate: String,
   addmissionTime: String,
   createdAt: {
     type: Date,
