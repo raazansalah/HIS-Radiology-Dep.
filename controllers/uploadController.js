@@ -20,7 +20,7 @@ exports.uploadFile = upload.single('myImage');
 exports.userRedirect = catchAsync(async (req, res, next) => {
   await Scan.create({
     patient: req.body.id,
-    device: req.user.deviceManaged,
+    device: req.user.device,
     file: req.file.filename
   });
   if (req.user.role === 'Doctor') res.redirect('/getDoctor');
