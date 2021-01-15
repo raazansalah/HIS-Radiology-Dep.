@@ -139,12 +139,7 @@ exports.getPatient = catchAsync(async (req, res, next) => {
 
 exports.getTech = catchAsync(async (req, res, next) => {
   const tech = await Staff.findById(req.user.id);
-<<<<<<< HEAD
-  const device = await Device.findById(tech.deviceManaged);
-  console.log(device);
-=======
   const device = await Device.findById(tech.device);
->>>>>>> b43d1b5e46ecdef1ad2b5b6eff62e25db8a2d516
   res.status(200).render('profileTech', { tech, device, qs: req.body });
 });
 
