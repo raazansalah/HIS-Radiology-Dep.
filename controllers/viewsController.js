@@ -38,7 +38,7 @@ exports.postContactForm = catchAsync(async (req, res, next) => {
     patient: req.body.email,
     complain: req.body.message,
     visitDate: req.body.date
-  }); //.create returns a promise
+  });
   res.status(200).render('contact', { qs: req.body });
 });
 
@@ -53,7 +53,6 @@ exports.getDevices = catchAsync(async (req, res, next) => {
 exports.getAllPatients = catchAsync(async (req, res) => {
   const patient = await Patient.find();
 
-  //SEND RESPONSE
   res.status(200).render('viewPatients', {
     patients: patient
   });
@@ -61,9 +60,6 @@ exports.getAllPatients = catchAsync(async (req, res) => {
 
 exports.getAllDoctors = catchAsync(async (req, res) => {
   const doctor = await Staff.find({ role: 'Doctor' });
-  //console.log(doctor);
-
-  //SEND RESPONSE
   res.status(200).render('viewDoctors', {
     doctors: doctor
   });
@@ -71,7 +67,6 @@ exports.getAllDoctors = catchAsync(async (req, res) => {
 exports.getAllTechnicians = catchAsync(async (req, res) => {
   const technician = await Staff.find({ role: 'Technician' });
 
-  //SEND RESPONSE
   res.status(200).render('viewTechs', {
     technicians: technician
   });
@@ -81,7 +76,6 @@ exports.getAllComplains = catchAsync(async (req, res) => {
   const complain = await Complain.find();
   const user = await Patient.find({ email: complain.patient }).select('name');
 
-  //SEND RESPONSE
   res.status(200).render('viewComplains', {
     complains: complain,
     name: user.name,
@@ -110,10 +104,8 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
   const doctor = await Staff.findById(req.user.id);
   const device = await Device.findById(doctor.deviceManaged);
   if (!doctor) {
-    //If the ID was valid, the output data will be null
     return next(new AppError('No document found with that ID', 404));
   }
-  //console.log(device);
   res.status(200).render('profileDoc', {
     doctor,
     device,
@@ -122,10 +114,9 @@ exports.getDoctor = catchAsync(async (req, res, next) => {
 });
 
 exports.getPatient = catchAsync(async (req, res, next) => {
-  const patient = await Patient.findById(req.user.id).populate('scans'); //can be: .findOne({_id:req.params.id}) as we did on shell
+  const patient = await Patient.findById(req.user.id).populate('scans');
 
   if (!patient) {
-    //If the ID was valid, the output data will be null
     return next(new AppError('No document found with that ID', 404));
   }
   const fileNames = [];
@@ -149,12 +140,12 @@ exports.getPatient = catchAsync(async (req, res, next) => {
 exports.getTech = catchAsync(async (req, res, next) => {
   const tech = await Staff.findById(req.user.id);
   const device = await Device.findById(tech.deviceManaged);
+  console.log(device);
   res.status(200).render('profileTech', { tech, device, qs: req.body });
 });
 
 exports.addDevice = catchAsync(async (req, res, next) => {
-  //try {
-  const newDoc = await Device.create(req.body); //.create returns a promise
+  const newDoc = await Device.create(req.body);
   res.status(201).json({
     status: 'success',
     data: {

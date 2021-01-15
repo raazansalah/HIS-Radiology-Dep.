@@ -23,56 +23,56 @@ router.get('/logout', authController.logout);
 
 router.post('/addDevice', viewsController.addDevice);
 
-router.use(viewsController.protect);
+router.use(authController.protect);
 
 router.post(
   '/upload',
-  viewsController.restrictTo('Doctor', 'Technician'),
+  authController.restrictTo('Doctor', 'Technician'),
   uploadController.uploadFile,
   uploadController.userRedirect
 );
 
 router.get(
   '/getDoctor',
-  viewsController.restrictTo('Doctor'),
+  authController.restrictTo('Doctor'),
   viewsController.getDoctor
 );
 
 router.get(
   '/getTech',
-  viewsController.restrictTo('Technician'),
+  authController.restrictTo('Technician'),
   viewsController.getTech
 );
 router.get(
   '/getPatient',
-  viewsController.restrictTo('Patient'),
+  authController.restrictTo('Patient'),
   viewsController.getPatient
 );
 
 router
   .get(
     '/contactus',
-    viewsController.restrictTo('Patient'),
+    authController.restrictTo('Patient'),
     viewsController.getContactForm
   )
   .post(
     '/contactus',
-    viewsController.restrictTo('Patient'),
+    authController.restrictTo('Patient'),
     viewsController.postContactForm
   );
 router
   .get(
     '/appointments',
-    viewsController.restrictTo('Patient'),
+    authController.restrictTo('Patient'),
     viewsController.getAppointment
   )
   .post(
     '/appointments',
-    viewsController.restrictTo('Patient'),
+    authController.restrictTo('Patient'),
     viewsController.postAppointment
   );
 
-router.use(viewsController.restrictTo('Admin'));
+router.use(authController.restrictTo('Admin'));
 router.get('/adminHome', viewsController.getadminHome);
 router.get('/complains', viewsController.getAllComplains);
 router.get('/dashboard', viewsController.getDashboard);

@@ -33,22 +33,20 @@
 					<nav class="main-nav">
 						<!-- ***** Logo Start ***** -->
 						<a href="#" class="logo">
-                            <p class="radio">Radiology</p>
-                        </p>
-                            
-                        </a>
+							<p class="radio">Radiology</p>
+							</p>
+
+						</a>
 						<!-- ***** Logo End ***** -->
 						<!-- ***** Menu Start ***** -->
 						<ul class="nav">
-							<li><a href="/patientProfile/views/home.ejs">Home</a></li>
-							<li><a href="/patientProfile/views/viewPatient.ejs">SignUp</a></li>
-							<li><a href="/patientProfile/views/viewDoc.ejs">Login</a></li>
-							<li><a href="/patientProfile/views/viewTech.ejs" class="active">PatientView</a></li>
-							<li><button class="btn btn--radius-2 btn--blue" type="submit" style="background-color: #c44cba;
+							<li><a href="/appointments">Book</a></li>
+							<li><a href="/contactus">Complain</a></li>
+							<li><a class="btn btn--radius-2 btn--blue" href="/logout" style="background-color: #c44cba;
 								border-radius: 20px;
 								font-weight: bold;
 								color: white;
-								font-family: Verdana, Geneva, Tahoma, sans-serif;">logout</button></li>
+								font-family: Verdana, Geneva, Tahoma, sans-serif;">Log out</a> </li>
 
 						</ul>
 						<a class='menu-trigger'>
@@ -62,14 +60,13 @@
 	</header>
 	<div class="limiter">
 		<div class="container-table100">
-			
+
 			<div class="wrap-table100">
 				<div class="table100">
 					<table>
 						<thead>
 							<tr class="table100-head">
 								<th class="column1">Name</th>
-								<th class="column2">SSN</th>
 								<th class="column3">ID</th>
 								<th class="column4">Sex</th>
 								<th class="column5">Birthdate</th>
@@ -87,43 +84,37 @@
 									<%= patient.name %>
 								</td>
 								<td class="column2">
-									<%= patient.ssn %>
-								</td>
-								<td class="column3">
 									<%= patient._id %>
 								</td>
-								<td class="column4">
+								<td class="column3">
 									<%= patient.sex %>
 								</td>
-								<td class="column5">
+								<td class="column4">
 									<%= patient.birthdate %>
 								</td>
 
-								<td class="column7">
+								<td class="column5">
 									<%= patient.phoneNumber %>
 								</td>
 
-								<td class="column9">
+								<td class="column6">
 									<%= patient.email %>
 								</td>
-								<td class="column10">
+								<td class="column7">
 									<ul>
-										<% files.map(file => { %>
-										  <li>
-											<a href="<%= file.url %>"><%= file.name %></a>
-										  </li>
-										<% }) %>
+										<% files.map(file=> { %>
+											<li>
+												<a href="<%= file.url %>">
+													<%= file.name %>
+												</a>
+											</li>
+											<% }) %>
 									</ul>
 								</td>
 							</tr>
-							<div class="button_cont"> <button class="example_b" onclick="btnClicked()" target="_blank"
-									rel="nofollow noopener">Book</button>
-								<button class="example_b" onclick="btnClicked1()" target="_blank"
-									rel="nofollow noopener">Complain</button>
-							</div>
 						</tbody>
 					</table>
-				
+
 				</div>
 			</div>
 		</div>
@@ -155,7 +146,7 @@
 		}
 	</script>
 
-<script src="/patientProfile/js/bootstrap.min.js"></script>
+	<script src="/patientProfile/js/bootstrap.min.js"></script>
 	<script src="/patientProfile/js/jquery.counterup.min.js"></script>
 	<script src="/patientProfile/js/jquery-2.1.0.min.js"></script>
 	<script src="/patientProfile/js/custom.min.js"></script>

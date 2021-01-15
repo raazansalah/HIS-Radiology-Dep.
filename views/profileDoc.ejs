@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title> Doctors </title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="/docProfile/images/icons/spreadsheet-512.png"/>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/docProfile/images/icons/spreadsheet-512.png" />
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/docProfile/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/docProfile/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/docProfile/vendor/animate/animate.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/docProfile/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/docProfile/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/docProfile/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/docProfile/css/main.css">
 	<link rel="stylesheet" type="text/css" href="/docProfile/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/docProfile/css/flex-slider.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 </head>
-<body>	
+
+<body>
 	<header class="header-area header-sticky">
 		<div class="container">
 			<div class="row">
@@ -31,91 +33,87 @@
 					<nav class="main-nav">
 						<!-- ***** Logo Start ***** -->
 						<a href="#" class="logo">
-                            <p class="radio">Radiology </p>>
-                        </p>
-						<!-- ***** Logo End ***** -->
-						<!-- ***** Menu Start ***** -->
-						<ul class="nav">
-							
-							<li><a href="views/home.ejs" >Home</a></li>
-							<li><a href="views/contactUs.ejs">Sign up</a></li>
-							<li><a href="views/contactUs.ejs" >Login</a></li>
-							<li><button class="btn btn--radius-2 btn--blue" type="submit" style="background-color: #c44cba;
-								border-radius: 20px;
-								font-weight: bold;
-								color: white;
-								font-family: Verdana, Geneva, Tahoma, sans-serif;">logout</button></li>
-							
-						</ul>
-						<a class='menu-trigger'>
-							<span>Menu</span>
-						</a>
-						<!-- ***** Menu End ***** -->
+							<p class="radio">Radiology </p>>
+							</p>
+							<!-- ***** Logo End ***** -->
+							<!-- ***** Menu Start ***** -->
+							<ul class="nav">
+								<li><a class="btn btn--radius-2 btn--blue" href="/logout" style="background-color: #c44cba;
+									border-radius: 20px;
+									font-weight: bold;
+									color: white;
+									font-family: Verdana, Geneva, Tahoma, sans-serif;">Log out</a> </li>
+
+							</ul>
+							<a class='menu-trigger'>
+								<span>Menu</span>
+							</a>
+							<!-- ***** Menu End ***** -->
 					</nav>
 				</div>
 			</div>
 		</div>
-	</header> 
+	</header>
 	<div class="limiter">
 		<div class="container-table100">
-			
+
 			<div class="wrap-table100">
 				<div class="table100">
-					
-						<table>
-							<thead>
-								<tr class="table100-head">
-									<th class="column1">Name</th>
-									<th class="column2">ID</th>
-									<th class="column3">Sex</th>
-									<th class="column4">Birthdate</th>
-									<th class="column5">Address</th>
-									<th class="column6">Hours Worked</th>
-									<th class="column7">Phone</th>
-									<th class="column8">Email</th>
-									
-								</tr>
-						    </thead>
-						    <tbody>
-							
-								<tr>
-									<td class="column1">
-										<%= doctor.name %>
-									</td>
-									<td class="column2">
-										<%= doctor._id %>
-									</td>
-									<td class="column3">
-										<%= doctor.sex %>
-									</td>
-									<td class="column4">
-										<%= doctor.birthdate %>
-									</td>
-									<td class="column5">
-										<%= doctor.address %>
-									</td>
-									<td class="column6">
-										<%= doctor.hoursWorked %>
-									</td>
-									<td class="column7">
-										<%= doctor.phoneNumber %>
-									</td>
-									<td class="column8">
-										<%= doctor.email %>
-									</td>
-									
-								</tr>
-						
+
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Name</th>
+								<th class="column2">ID</th>
+								<th class="column3">Sex</th>
+								<th class="column4">Birthdate</th>
+								<th class="column5">Address</th>
+								<th class="column6">Hours Worked</th>
+								<th class="column7">Phone</th>
+								<th class="column8">Email</th>
+
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr>
+								<td class="column1">
+									<%= doctor.name %>
+								</td>
+								<td class="column2">
+									<%= doctor._id %>
+								</td>
+								<td class="column3">
+									<%= doctor.sex %>
+								</td>
+								<td class="column4">
+									<%= doctor.birthdate %>
+								</td>
+								<td class="column5">
+									<%= doctor.address %>
+								</td>
+								<td class="column6">
+									<%= doctor.hoursWorked %>
+								</td>
+								<td class="column7">
+									<%= doctor.phoneNumber %>
+								</td>
+								<td class="column8">
+									<%= doctor.email %>
+								</td>
+
+							</tr>
+
 							<div class="container" style="height: 220px;
 							position: relative;
 							margin-top: 30px;
-							"> 
+							">
 								<%= typeof msg !='undefined' ? msg :'' %>
-								<form action="/upload" method="POST" enctype="multipart/form-data">
-									<div class="file-field input-field" >
-										<div class="btn grey" >
-											
-											<input name="myImage" type="file" style="color:black !important;
+									<form action="/upload" method="POST" enctype="multipart/form-data">
+										<div class="file-field input-field">
+											<div class="btn grey">
+
+												<input name="myImage" type="file" style="color:black !important;
 											text-transform: uppercase;
 											text-decoration: none;
 											background:white;
@@ -128,14 +126,14 @@
 											position: relative;
 											border: none;
 											transition: all 0.4s ease 0s;">
+											</div>
+											<div class="file-path-wrapper">
+												<input style="margin-top: 15px; height: 30px;
+											width: 300px;border-radius: 50px; " type="text" name="id" placeholder="Please Enter Patient ID"
+													value="<%=qs.id%>">
+											</div>
 										</div>
-										<div class="file-path-wrapper" >
-											<input style="margin-top: 15px; height: 30px;
-											width: 300px;border-radius: 50px; " type="text" name="id"
-											 placeholder="Please Enter Patient ID" value="<%=qs.id%>">
-										</div>
-									</div>
-									<button type="submit" class="btn" style="color: #fff !important;
+										<button type="submit" class="btn" style="color: #fff !important;
 									text-transform: uppercase;
 									text-decoration: none;
 									background: #fc61bb;
@@ -149,75 +147,75 @@
 									position: relative;
 									border: none;
 									transition: all 0.4s ease 0s;">SUBMIT</button>
-								</form>
+									</form>
 
 							</div>
-						    
-					
-							
-			
+
+
+
+
 						</tbody>
 					</table>
-				
-					
-						
-					
+
+
+
+
 				</div>
 			</div>
 			<div class="wrap-table100">
 				<div class="table100">
-				
-						<table>
-							<% if(device) {%>
-								<thead>
-									<tr class="table100-head">
-										<th class="column1">Name</th>
-										<th class="column2">Model</th>
-										<th class="column3">ServiceDate</th>
-										<th class="column4">SubSection</th>
-										<th class="column5">ArrivalDate</th>
-	
-	
-	
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td class="column1">
-											<%= device.name %>
-										</td>
-										<td class="column2">
-											<%= device.model %>
-										</td>
-										<td class="column3">
-											<%= device.serviceDate %>
-										</td>
-										<td class="column4">
-											<%= device.subSection %>
-										</td>
-										<td class="column5">
-											<%= device.arrivalDate %>
-										</td>
-									</tr>
-									<%}%>
-								</tbody>
+
+					<table>
+						<% if(device) {%>
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Name</th>
+									<th class="column2">Model</th>
+									<th class="column3">ServiceDate</th>
+									<th class="column4">SubSection</th>
+									<th class="column5">ArrivalDate</th>
+
+
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="column1">
+										<%= device.name %>
+									</td>
+									<td class="column2">
+										<%= device.model %>
+									</td>
+									<td class="column3">
+										<%= device.serviceDate %>
+									</td>
+									<td class="column4">
+										<%= device.subSection %>
+									</td>
+									<td class="column5">
+										<%= device.arrivalDate %>
+									</td>
+								</tr>
+								<%}%>
+							</tbody>
 					</table>
-					
-						
-					
+
+
+
 				</div>
 			</div>
 		</div>
 	</div>
-    <script>
-		
-		function btnClicked1(){
-			document.location.href="https://www.google.com/";
+	<script>
+
+		function btnClicked1() {
+			document.location.href = "https://www.google.com/";
 		}
 	</script>
 
-	
-<script src="/docProfile/js/bootstrap.min.js"></script>
+
+	<script src="/docProfile/js/bootstrap.min.js"></script>
 	<script src="/docProfile/js/jquery.counterup.min.js"></script>
 	<script src="/docProfile/js/jquery-2.1.0.min.js"></script>
 	<script src="/docProfile/js/custom.min.js"></script>
@@ -225,15 +223,16 @@
 	<script src="/docProfile/js/scrollreveal.min.js"></script>
 	<script src="/docProfile/js/waypoints.min.js"></script>
 	<script src="/docProfile/js/popper.js"></script>
-<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 	<script src="/docProfile/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/docProfile/vendor/bootstrap/js/popper.js"></script>
 	<script src="/docProfile/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/docProfile/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="/docProfile/js/main.js"></script>
 
 </body>
+
 </html>/docProfile/
