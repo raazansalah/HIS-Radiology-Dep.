@@ -20,39 +20,49 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/patientProfile/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/patientProfile/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/patientProfile/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/patientProfile/css/flex-slider.css">
 	<!--===============================================================================================-->
 </head>
 
 <body>
+	<header class="header-area header-sticky">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="main-nav">
+						<!-- ***** Logo Start ***** -->
+						<a href="#" class="logo">
+                            <p class="radio">Radiology</p>
+                        </p>
+                            
+                        </a>
+						<!-- ***** Logo End ***** -->
+						<!-- ***** Menu Start ***** -->
+						<ul class="nav">
+							<li><a href="/patientProfile/views/home.ejs">Home</a></li>
+							<li><a href="/patientProfile/views/viewPatient.ejs">SignUp</a></li>
+							<li><a href="/patientProfile/views/viewDoc.ejs">Login</a></li>
+							<li><a href="/patientProfile/views/viewTech.ejs" class="active">PatientView</a></li>
+							<li><button class="btn btn--radius-2 btn--blue" type="submit" style="background-color: #c44cba;
+								border-radius: 20px;
+								font-weight: bold;
+								color: white;
+								font-family: Verdana, Geneva, Tahoma, sans-serif;">logout</button></li>
+
+						</ul>
+						<a class='menu-trigger'>
+							<span>Menu</span>
+						</a>
+						<!-- ***** Menu End ***** -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
 	<div class="limiter">
 		<div class="container-table100">
-			<header class="header-area header-sticky">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-							<nav class="main-nav">
-								<!-- ***** Logo Start ***** -->
-								<a href="#" class="logo">
-									<img src="/patientProfile/images/logo-3.png" alt="Rad" />
-								</a>
-								<!-- ***** Logo End ***** -->
-								<!-- ***** Menu Start ***** -->
-								<ul class="nav">
-									<li><a href="/patientProfile/views/home.ejs">Home</a></li>
-									<li><a href="/patientProfile/views/viewPatient.ejs">SignUp</a></li>
-									<li><a href="/patientProfile/views/viewDoc.ejs">Login</a></li>
-									<li><a href="/patientProfile/views/viewTech.ejs" class="active">PatientView</a></li>
-
-								</ul>
-								<a class='menu-trigger'>
-									<span>Menu</span>
-								</a>
-								<!-- ***** Menu End ***** -->
-							</nav>
-						</div>
-					</div>
-				</div>
-			</header>
+			
 			<div class="wrap-table100">
 				<div class="table100">
 					<table>
@@ -145,7 +155,14 @@
 		}
 	</script>
 
-
+<script src="/patientProfile/js/bootstrap.min.js"></script>
+	<script src="/patientProfile/js/jquery.counterup.min.js"></script>
+	<script src="/patientProfile/js/jquery-2.1.0.min.js"></script>
+	<script src="/patientProfile/js/custom.min.js"></script>
+	<script src="/patientProfile/js/imgfix.min.js"></script>
+	<script src="/patientProfile/js/scrollreveal.min.js"></script>
+	<script src="/patientProfile/js/waypoints.min.js"></script>
+	<script src="/patientProfile/js/popper.js"></script>
 
 	<!--===============================================================================================-->
 	<script src="/patientProfile/vendor/jquery/jquery-3.2.1.min.js"></script>
