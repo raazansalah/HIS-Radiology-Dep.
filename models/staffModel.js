@@ -81,7 +81,7 @@ staffSchema.pre(/^find/, function(next) {
 });
 
 staffSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) return next(); //So that we don't change it every time the staff updates his profile
+  if (!this.isModified('password')) return next();
 
   this.password = await bcrypt.hash(this.password, 12);
 
