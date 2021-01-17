@@ -85,10 +85,11 @@ exports.postLogin = catchAsync(async (req, res, next) => {
     user = await Patient.findOne({ email }).select('+password');
   else if (role === 'Doctor')
     user = await Staff.findOne({ email, role: 'Doctor' }).select('+password');
-  else
+  else if (role === 'Technician')
     user = await Staff.findOne({ email, role: 'Technician' }).select(
       '+password'
     );
+  else user = await Staff.findOne({ email, role: 'Admin' }).select('+password');
   if (!user || !(await user.correctPass(password, user.password)))
     return next(new AppError('Invalid email or password', 400));
 
